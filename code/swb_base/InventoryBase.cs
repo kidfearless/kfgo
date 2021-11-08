@@ -1,34 +1,36 @@
-﻿using System;
-using System.Linq;
-using Sandbox;
+﻿using Sandbox;
+
 using SWB_Base;
+
+using System;
+using System.Linq;
 
 partial class InventoryBase : BaseInventory
 {
-	public InventoryBase(PlayerBase player) : base(player)
+	public InventoryBase( PlayerBase player ) : base( player )
 	{
 	}
 
-	public override bool Add(Entity ent, bool makeActive = false)
+	public override bool Add( Entity ent, bool makeActive = false )
 	{
 		PlayerBase player = this.Owner as PlayerBase;
 		WeaponBase weapon = ent as WeaponBase;
 
 		bool showNotice = !player.SupressPickupNotices;
 
-		if (weapon != null && this.IsCarryingType(ent.GetType()))
+		if ( weapon != null && this.IsCarryingType( ent.GetType() ) )
 		{
 			int ammo = weapon.Primary.Ammo;
 			AmmoType ammoType = weapon.Primary.AmmoType;
 
-			if (ammo > 0)
+			if ( ammo > 0 )
 			{
-				player.GiveAmmo(ammoType, ammo);
+				player.GiveAmmo( ammoType, ammo );
 
-				if (showNotice)
+				if ( showNotice )
 				{
-					Sound.FromWorld("dm.pickup_ammo", ent.Position);
-					PickupFeed.OnPickup(To.Single(player), $"+{ammo} {ammoType}");
+					Sound.FromWorld( "dm.pickup_ammo", ent.Position );
+					PickupFeed.OnPickup( To.Single( player ), $"+{ammo} {ammoType}" );
 				}
 			}
 
@@ -37,38 +39,38 @@ partial class InventoryBase : BaseInventory
 			return false;
 		}
 
-		if (weapon != null && showNotice)
+		if ( weapon != null && showNotice )
 		{
-			Sound.FromWorld("dm.pickup_weapon", ent.Position);
+			Sound.FromWorld( "dm.pickup_weapon", ent.Position );
 		}
 
-		return base.Add(ent, makeActive);
+		return base.Add( ent, makeActive );
 	}
 
 	public virtual bool IsCarryingType<T>()
 	{
-		return this.List.Any(x => x.GetType() == typeof(T));
+		return this.List.Any( x => x.GetType() == typeof( T ) );
 	}
 
-	public virtual bool IsCarryingType(Type type)
+	public virtual bool IsCarryingType( Type type )
 	{
-		return this.List.Any(x => x.GetType() == type);
+		return this.List.Any( x => x.GetType() == type );
 	}
 
 	public override Entity DropActive()
 	{
-		if (!Host.IsServer)
+		if ( !Host.IsServer )
 		{
 			return null;
 		}
 
 		Entity ent = this.Owner.ActiveChild;
-		if (ent == null)
+		if ( ent == null )
 		{
 			return null;
 		}
 
-		if (ent is WeaponBase weapon && weapon.CanDrop && this.Drop(ent))
+		if ( ent is WeaponBase weapon && weapon.CanDrop && this.Drop( ent ) )
 		{
 			this.Owner.ActiveChild = null;
 			return ent;

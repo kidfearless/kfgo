@@ -27,7 +27,7 @@ namespace KFGO.UI
 		public override void Tick()
 		{
 			base.Tick();
-			if(Local.Pawn is not KFPlayer player)
+			if ( Local.Pawn is not KFPlayer player )
 			{
 				return;
 			}
@@ -45,7 +45,7 @@ namespace KFGO.UI
 			KFGame.TryInvokeHotReload( System.DateTime.Now );
 			Log.Info( "OnHotLoad" );
 			base.OnHotloaded();
-			this.DeleteChildren(true);
+			this.DeleteChildren( true );
 			this.InitializeComponents();
 		}
 	}

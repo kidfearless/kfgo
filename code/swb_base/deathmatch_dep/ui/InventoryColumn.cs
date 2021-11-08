@@ -1,11 +1,10 @@
-﻿
-using Sandbox;
-using Sandbox.UI;
+﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System;
+
+using SWB_Base;
+
 using System.Collections.Generic;
 using System.Linq;
-using SWB_Base;
 
 public class InventoryColumn : Panel
 {

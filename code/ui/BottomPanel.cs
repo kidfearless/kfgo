@@ -1,8 +1,5 @@
 ﻿using Sandbox;
 using Sandbox.UI;
-using Sandbox.UI.Construct;
-
-using System;
 
 //
 // You don't need to put things in a namespace, but it doesn't hurt.
@@ -39,7 +36,7 @@ namespace KFGO.UI
 
 		protected override void InitializeComponents()
 		{
-			this.HealthBar = this.AddChild<HealthPanel>( nameof(HealthPanel) );
+			this.HealthBar = this.AddChild<HealthPanel>( nameof( HealthPanel ) );
 			this.ArmorBar = this.AddChild<ArmorPanel>( nameof( ArmorPanel ) );
 		}
 	}

@@ -1,54 +1,52 @@
-﻿
-using System;
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 namespace SWB_Base
 {
 
-    public class SniperScope : Panel
-    {
-        Panel LensWrapper;
-        Panel ScopeWrapper;
+	public class SniperScope : Panel
+	{
+		Panel LensWrapper;
+		Panel ScopeWrapper;
 
-        Panel LeftBar;
-        Panel RightBar;
-        Panel TopBar;
-        Panel BottomBar;
+		Panel LeftBar;
+		Panel RightBar;
+		Panel TopBar;
+		Panel BottomBar;
 
-        Image Lens;
-        Image Scope;
+		Image Lens;
+		Image Scope;
 
-        float lensRotation;
+		float lensRotation;
 
-        public SniperScope(string lensTexture, string scopeTexture)
-        {
-			this.StyleSheet.Load("/swb_base/ui/SniperScope.scss");
+		public SniperScope( string lensTexture, string scopeTexture )
+		{
+			this.StyleSheet.Load( "/swb_base/ui/SniperScope.scss" );
 
-			this.LensWrapper = this.Add.Panel("lensWrapper");
-			this.Lens = this.LensWrapper.Add.Image(lensTexture, "lens");
+			this.LensWrapper = this.Add.Panel( "lensWrapper" );
+			this.Lens = this.LensWrapper.Add.Image( lensTexture, "lens" );
 
-            if (scopeTexture != null)
-            {
-				this.Scope = this.LensWrapper.Add.Image(scopeTexture, "scope");
+			if ( scopeTexture != null )
+			{
+				this.Scope = this.LensWrapper.Add.Image( scopeTexture, "scope" );
 
-				this.LeftBar = this.Add.Panel("leftBar");
-				this.RightBar = this.Add.Panel("rightBar");
-				this.TopBar = this.Add.Panel("topBar");
-				this.BottomBar = this.Add.Panel("bottomBar");
-            }
-        }
+				this.LeftBar = this.Add.Panel( "leftBar" );
+				this.RightBar = this.Add.Panel( "rightBar" );
+				this.TopBar = this.Add.Panel( "topBar" );
+				this.BottomBar = this.Add.Panel( "bottomBar" );
+			}
+		}
 
-        public override void Tick()
-        {
-            base.Tick();
+		public override void Tick()
+		{
+			base.Tick();
 
 			Entity player = Local.Pawn;
-            if (player == null)
-            {
-                return;
-            }
+			if ( player == null )
+			{
+				return;
+			}
 
 			// Show when zooming
 			this.Style.Opacity = (player.ActiveChild is not WeaponBase weapon || !weapon.IsScoped) ? 0 : 1;
@@ -81,6 +79,6 @@ namespace SWB_Base
 			*/
 
 			this.Style.Dirty();
-        }
-    }
+		}
+	}
 }

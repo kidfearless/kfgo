@@ -1,2 +1,4 @@
 /.intermediate
 /tools_asset_info.bin
+code/obj/
+code/Properties/

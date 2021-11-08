@@ -1,6 +1,4 @@
 ﻿using Sandbox;
-using Sandbox.UI;
-using System;
 
 namespace SWB_Base
 {
@@ -9,18 +7,18 @@ namespace SWB_Base
 	/// </summary>
 	public class CarriableBase : BaseCarriable
 	{
-		public override void ActiveStart(Entity ent)
+		public override void ActiveStart( Entity ent )
 		{
 			//base.ActiveStart( ent );
 
 			this.EnableDrawing = true;
 
-			if (ent is Player player)
+			if ( ent is Player player )
 			{
 				PawnAnimator animator = player.GetActiveAnimator();
-				if (animator != null)
+				if ( animator != null )
 				{
-					this.SimulateAnimator(animator);
+					this.SimulateAnimator( animator );
 				}
 			}
 

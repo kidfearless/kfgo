@@ -1,9 +1,5 @@
-﻿using KFGO;
-
+﻿
 using Sandbox;
-
-using System.ComponentModel;
-using System.Linq;
 namespace KFGO
 {
 	partial class Controller : BasePlayerController

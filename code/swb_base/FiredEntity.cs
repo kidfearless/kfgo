@@ -6,7 +6,7 @@
 
 namespace SWB_Base
 {
-    public class FiredEntity : ModelEntity
+	public class FiredEntity : ModelEntity
 	{
 		public virtual WeaponBase Weapon { get; set; } // The parent weapon
 		public virtual Vector3 StartVelocity { get; set; }
@@ -31,7 +31,7 @@ namespace SWB_Base
 			this.MoveType = MoveType.Physics;
 			this.PhysicsEnabled = true;
 			this.UsePhysicsCollision = true;
-			this.SetupPhysicsFromModel(PhysicsMotionType.Dynamic);
+			this.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 			this.PhysicsGroup.AddVelocity( this.StartVelocity * this.Speed );
 			this.PhysicsBody.GravityEnabled = this.UseGravity;
 
@@ -39,11 +39,11 @@ namespace SWB_Base
 			_ = this.DeleteAsync( this.RemoveDelay );
 		}
 
-		protected override void OnPhysicsCollision(CollisionEventData eventData)
+		protected override void OnPhysicsCollision( CollisionEventData eventData )
 		{
-			base.OnPhysicsCollision(eventData);
+			base.OnPhysicsCollision( eventData );
 
-			if ( this.IsSticky && eventData.Entity.IsValid())
+			if ( this.IsSticky && eventData.Entity.IsValid() )
 			{
 				this.Velocity = Vector3.Zero;
 				this.Parent = eventData.Entity;

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
 
 using SWB_Base;
+
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// The main inventory panel, top left of the screen.

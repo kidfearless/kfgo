@@ -1,8 +1,6 @@
 ﻿
 using Sandbox;
 
-using System.Net.Http;
-
 namespace KFGO
 {
 	partial class KFPlayer : SWB_Base.PlayerBase

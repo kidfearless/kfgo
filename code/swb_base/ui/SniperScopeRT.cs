@@ -15,60 +15,60 @@ using Sandbox.UI.Construct;
 namespace SWB_Base
 {
 
-    public class SniperScopeRT : Panel
-    {
-        Image ScopeRT;
-        Texture RTTexture;
-        Texture ColorTexture;
-        Texture DepthTexture;
-        ScenePanel scene;
+	public class SniperScopeRT : Panel
+	{
+		Image ScopeRT;
+		Texture RTTexture;
+		Texture ColorTexture;
+		Texture DepthTexture;
+		ScenePanel scene;
 
-        public SniperScopeRT(string lensTexture, string scopeTexture)
-        {
-			this.StyleSheet.Load("/swb_base/ui/SniperScopeRT.scss");
+		public SniperScopeRT( string lensTexture, string scopeTexture )
+		{
+			this.StyleSheet.Load( "/swb_base/ui/SniperScopeRT.scss" );
 
-            SceneWorld.SetCurrent(SceneWorld.Current);
+			SceneWorld.SetCurrent( SceneWorld.Current );
 			//sceneCapture = SceneCapture.Create( "worldTestScene", 500, 500 );
-			this.ScopeRT = this.Add.Image("scene:worldTestScene");
+			this.ScopeRT = this.Add.Image( "scene:worldTestScene" );
 
 			// TESTING
-			this.ColorTexture = Texture.CreateRenderTarget().WithSize(500, 500).WithScreenFormat()
-                           .WithScreenMultiSample()
-                           .Create();
+			this.ColorTexture = Texture.CreateRenderTarget().WithSize( 500, 500 ).WithScreenFormat()
+									.WithScreenMultiSample()
+									.Create();
 
-			this.DepthTexture = Texture.CreateRenderTarget().WithSize(500, 500).WithDepthFormat()
-                           .WithScreenMultiSample()
-                           .Create();
-        }
+			this.DepthTexture = Texture.CreateRenderTarget().WithSize( 500, 500 ).WithDepthFormat()
+									.WithScreenMultiSample()
+									.Create();
+		}
 
-        public override void OnDeleted()
-        {
-            base.OnDeleted();
+		public override void OnDeleted()
+		{
+			base.OnDeleted();
 
-            //sceneCapture?.Delete();
-            //sceneCapture = null;
-        }
+			//sceneCapture?.Delete();
+			//sceneCapture = null;
+		}
 
-        [Event("frame")]
-        public void OnFrame()
-        {
+		[Event( "frame" )]
+		public void OnFrame()
+		{
 
-        }
+		}
 
-        public override void Tick()
-        {
-            base.Tick();
+		public override void Tick()
+		{
+			base.Tick();
 
 			Entity player = Local.Pawn;
-            if (player == null)
-            {
-                return;
-            }
+			if ( player == null )
+			{
+				return;
+			}
 
-            if (player.ActiveChild is not WeaponBaseSniper weapon)
-            {
-                return;
-            }
+			if ( player.ActiveChild is not WeaponBaseSniper weapon )
+			{
+				return;
+			}
 
 			// Update render camera
 			Vector3 targetPos = CurrentView.Position;
@@ -77,50 +77,50 @@ namespace SWB_Base
 			// sceneCapture.SetCamera( TargetPos, TargetAng, weapon.ZoomAmount );
 
 			// RenderTarget on a panel
-			Transform scopeBone = weapon.ViewModelEntity.GetBoneTransform("v_weapon_awm_bolt_action");
+			Transform scopeBone = weapon.ViewModelEntity.GetBoneTransform( "v_weapon_awm_bolt_action" );
 			Vector3 screenpos = scopeBone.Position.ToScreen();
 
-            if (screenpos.z < 0)
-            {
-                return;
-            }
+			if ( screenpos.z < 0 )
+			{
+				return;
+			}
 
-            this.Style.Left = Length.Fraction(screenpos.x);
-            this.Style.Top = Length.Fraction(screenpos.y);
-            this.Style.Dirty();
+			this.Style.Left = Length.Fraction( screenpos.x );
+			this.Style.Top = Length.Fraction( screenpos.y );
+			this.Style.Dirty();
 
 			// RenderTarget inside a material
 			SceneObject sceneObject = weapon.ViewModelEntity.SceneObject;
-            //RTTexture = Texture.Load("scene:worldTestScene", false);
+			//RTTexture = Texture.Load("scene:worldTestScene", false);
 
-            // TESTING
-            //Render.SetRenderTarget(RTTexture);
-            //Render.DrawScene(Texture.White, DepthTexture, new Vector2(500, 500), SceneWorld.Current, targetPos, targetAng, weapon.ZoomAmount);
+			// TESTING
+			//Render.SetRenderTarget(RTTexture);
+			//Render.DrawScene(Texture.White, DepthTexture, new Vector2(500, 500), SceneWorld.Current, targetPos, targetAng, weapon.ZoomAmount);
 
-            //sceneObject.SetValue("ScopeRT", RTTexture);
-        }
+			//sceneObject.SetValue("ScopeRT", RTTexture);
+		}
 
-        public override void DrawBackground(ref RenderState state)
-        {
+		public override void DrawBackground( ref RenderState state )
+		{
 			Entity player = Local.Pawn;
-            if (player == null)
-            {
-                return;
-            }
+			if ( player == null )
+			{
+				return;
+			}
 
-            if (player.ActiveChild is not WeaponBaseSniper weapon)
-            {
-                return;
-            }
+			if ( player.ActiveChild is not WeaponBaseSniper weapon )
+			{
+				return;
+			}
 
 			Vector3 targetPos = CurrentView.Position;
 			Angles targetAng = CurrentView.Rotation.Angles();
 			SceneObject sceneObject = weapon.ViewModelEntity.SceneObject;
 
-            Render.SetRenderTarget( this.RTTexture );
-            Render.DrawScene( this.ColorTexture, this.DepthTexture, new Vector2(500, 500), SceneWorld.Current, targetPos, targetAng, weapon.ZoomAmount);
+			Render.SetRenderTarget( this.RTTexture );
+			Render.DrawScene( this.ColorTexture, this.DepthTexture, new Vector2( 500, 500 ), SceneWorld.Current, targetPos, targetAng, weapon.ZoomAmount );
 
-            sceneObject.SetValue("ScopeRT", this.RTTexture );
-        }
-    }
+			sceneObject.SetValue( "ScopeRT", this.RTTexture );
+		}
+	}
 }

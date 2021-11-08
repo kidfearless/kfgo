@@ -1,11 +1,7 @@
 ﻿
 using Sandbox;
-using Sandbox.UI.Construct;
 
 using System;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
 
 namespace KFGO
 {
@@ -29,7 +25,7 @@ namespace KFGO
 			if ( time - LastHotReloadTime > TimeSpan.FromSeconds( 0.1 ) )
 			{
 				HotReload?.Invoke( time );
-				if(!Host.IsServer)
+				if ( !Host.IsServer )
 				{
 					Admin_HotLoad();
 				}
@@ -42,13 +38,13 @@ namespace KFGO
 		}
 
 #if DEBUG
-        [ServerCmd("__hotreload_server")]
+		[ServerCmd( "__hotreload_server" )]
 #else
         [AdminCmd("__hotreload_server")]
 #endif
 		public static void Admin_HotLoad()
 		{
-			if(Host.IsServer)
+			if ( Host.IsServer )
 			{
 				Log.Info( "Server" );
 				TryInvokeHotReload( DateTime.Now );
@@ -66,15 +62,15 @@ namespace KFGO
 		private void KFGame_HotReload( DateTime dateTime )
 		{
 			//InitializeGame();
-			if(!this.IsServer)
+			if ( !this.IsServer )
 			{
 				return;
 			}
 
-			foreach( Client client in Client.All)
+			foreach ( Client client in Client.All )
 			{
 
-				this.ClientJoined(client);
+				this.ClientJoined( client );
 			}
 		}
 

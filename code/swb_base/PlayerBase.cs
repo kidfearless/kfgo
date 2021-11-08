@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using Sandbox;
 
-using Sandbox;
+using System.Linq;
 
 namespace SWB_Base
 {
@@ -32,7 +32,7 @@ namespace SWB_Base
 			this.SetDefaultController();
 			this.SetDefaultAnimator();
 			this.SetDefaultCamera();
-			
+
 
 			this.EnableAllCollisions = true;
 			this.EnableDrawing = true;
@@ -45,7 +45,6 @@ namespace SWB_Base
 		}
 
 		public virtual void SetDefaultModel() => this.SetModel( this.PlayerModel );
-
 		public virtual void SetDefaultController() => this.Controller = new WalkController();
 		public virtual void SetDefaultAnimator() => this.Animator = new StandardPlayerAnimator();
 		public virtual void SetDefaultCamera() => this.Camera = new FirstPersonCamera();
