@@ -1,0 +1,8 @@
+{
+	"name": "kfgo",
+	"sharedassets": "*.*",
+	"type": "game",
+	"depends": [
+		"simple-weapon-base"
+	]
+}
