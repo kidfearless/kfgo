@@ -7,8 +7,8 @@ namespace SWB_Base
 
 	public class Hitmarker : Panel
 	{
-		public static Hitmarker Current;
-		private Marker activeMarker;
+		public static Hitmarker Current { get; set; }
+		protected Marker ActiveMarker { get; set; }
 
 		public Hitmarker()
 		{
@@ -24,12 +24,12 @@ namespace SWB_Base
 
 		public void Create( bool isKill )
 		{
-			if ( this.activeMarker != null )
+			if ( this.ActiveMarker != null )
 			{
-				this.activeMarker.Delete();
+				this.ActiveMarker.Delete();
 			}
 
-			this.activeMarker = new Marker( this, isKill );
+			this.ActiveMarker = new Marker( this, isKill );
 		}
 
 		public class Marker : Panel

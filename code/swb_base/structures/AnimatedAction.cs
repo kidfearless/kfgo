@@ -18,8 +18,8 @@ namespace SWB_Base
 		public string NewWorldModel { get; set; }
 		public string NewShootSound { get; set; }
 
-		private ClipInfo clipInfo = new ClipInfo();
-		private float canNextHandle = 0f;
+		private ClipInfo _ClipInfo = new ClipInfo();
+		private float _CanNextHandle = 0f;
 		public bool IsToggled { get; set; } = false;
 
 		private void HandleChanges( WeaponBase weaponBase )
@@ -28,10 +28,10 @@ namespace SWB_Base
 			{
 				if ( this.IsToggled )
 				{
-					this.clipInfo.ShootSound = weaponBase.Primary.ShootSound;
+					this._ClipInfo.ShootSound = weaponBase.Primary.ShootSound;
 				}
 
-				weaponBase.Primary.ShootSound = this.IsToggled ? this.NewShootSound : this.clipInfo.ShootSound;
+				weaponBase.Primary.ShootSound = this.IsToggled ? this.NewShootSound : this._ClipInfo.ShootSound;
 			}
 
 			if ( !string.IsNullOrEmpty( this.NewViewModel ) )
@@ -58,7 +58,7 @@ namespace SWB_Base
 
 		public bool Handle( Client owner, WeaponBase weaponBase )
 		{
-			if ( RealTime.Now < this.canNextHandle )
+			if ( RealTime.Now < this._CanNextHandle )
 			{
 				return false;
 			}
@@ -81,7 +81,7 @@ namespace SWB_Base
 			this.IsToggled = !this.IsToggled;
 
 			float canNextAnimateDelay = this.IsToggled ? this.OnAnimationDuration : this.OffAnimationDuration;
-			this.canNextHandle = RealTime.Now + canNextAnimateDelay;
+			this._CanNextHandle = RealTime.Now + canNextAnimateDelay;
 
 			// Reset animating after the delay
 			weaponBase.IsAnimating = true;

@@ -75,7 +75,7 @@ namespace SWB_Base
 			if ( this.IsServer && this.BarrelSmoking )
 			{
 				this.AddBarrelHeat();
-				if ( this.barrelHeat >= clipInfo.ClipSize * 0.75 )
+				if ( this.BarrelHeat >= clipInfo.ClipSize * 0.75 )
 				{
 					this.ShootEffects( clipInfo.BarrelSmokeParticle, null, null );
 				}
@@ -107,7 +107,7 @@ namespace SWB_Base
 			}
 
 			// Recoil
-			this.doRecoil = true;
+			this.DoRecoil = true;
 		}
 
 		async Task AsyncAttack( ClipInfo clipInfo, bool isPrimary, float delay )
@@ -172,7 +172,7 @@ namespace SWB_Base
 		{
 			if ( this.DualWield )
 			{
-				this.dualWieldLeftFire = !this.dualWieldLeftFire;
+				this.DualWieldLeftFire = !this.DualWieldLeftFire;
 			}
 
 			if ( this.PrimaryDelay > 0 )
@@ -286,7 +286,7 @@ namespace SWB_Base
 		{
 			Host.AssertClient();
 
-			BaseViewModel animatingViewModel = this.DualWield && this.dualWieldLeftFire ? this.dualWieldViewModel : this.ViewModelEntity;
+			BaseViewModel animatingViewModel = this.DualWield && this.DualWieldLeftFire ? this.DualWieldViewModel : this.ViewModelEntity;
 			ModelEntity firingViewModel = animatingViewModel;
 
 			// We don't want to change the world effect origin if we or others can see it

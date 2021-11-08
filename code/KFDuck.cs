@@ -11,8 +11,8 @@ namespace KFGO
 
 		// Uck, saving off the bbox kind of sucks
 		// and we should probably be changing the bbox size in PreTick
-		Vector3 originalMins;
-		Vector3 originalMaxs;
+		Vector3 _OriginalMins;
+		Vector3 _OriginalMaxs;
 
 		public KFDuck( BasePlayerController controller )
 		{
@@ -31,7 +31,7 @@ namespace KFGO
 				}
 				else
 				{
-					TraceResult pm = this.Controller.TraceBBox( this.Controller.Position, this.Controller.Position, this.originalMins, this.originalMaxs );
+					TraceResult pm = this.Controller.TraceBBox( this.Controller.Position, this.Controller.Position, this._OriginalMins, this._OriginalMaxs );
 					if ( !pm.StartedSolid )
 					{
 						this.IsActive = false;
@@ -48,8 +48,8 @@ namespace KFGO
 
 		internal void UpdateBBox( ref Vector3 mins, ref Vector3 maxs )
 		{
-			this.originalMins = mins;
-			this.originalMaxs = maxs;
+			this._OriginalMins = mins;
+			this._OriginalMaxs = maxs;
 
 			if ( this.IsActive )
 			{

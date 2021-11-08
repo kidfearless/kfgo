@@ -17,11 +17,11 @@ namespace SWB_Base
 
 	public class SniperScopeRT : Panel
 	{
-		Image ScopeRT;
-		Texture RTTexture;
-		Texture ColorTexture;
-		Texture DepthTexture;
-		ScenePanel scene;
+		protected Image ScopeRT { get; set; }
+		protected Texture RTTexture { get; set; }
+		protected Texture ColorTexture { get; set; }
+		protected Texture DepthTexture { get; set; }
+		protected ScenePanel scene { get; set; }
 
 		public SniperScopeRT( string lensTexture, string scopeTexture )
 		{

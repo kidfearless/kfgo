@@ -14,11 +14,11 @@ public partial class DeathmatchHud : HudEntity<RootPanel>
 
 		this.RootPanel.StyleSheet.Load( "swb_base/deathmatch_dep/ui/scss/DeathmatchHud.scss" );
 
-		//this.RootPanel.AddChild<NameTags>();
-		//this.RootPanel.AddChild<DamageIndicator>();
+		this.RootPanel.AddChild<NameTags>();
+		this.RootPanel.AddChild<DamageIndicator>();
 
 		this.RootPanel.AddChild<InventoryBar>();
-		//this.RootPanel.AddChild<PickupFeed>();
+		this.RootPanel.AddChild<PickupFeed>();
 
 		this.RootPanel.AddChild<ChatBox>();
 		this.RootPanel.AddChild<KillFeed>();

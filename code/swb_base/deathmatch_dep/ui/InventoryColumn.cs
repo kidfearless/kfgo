@@ -13,7 +13,7 @@ public class InventoryColumn : Panel
 	public Label Header;
 	public int SelectedIndex;
 
-	internal List<InventoryIcon> Icons = new();
+	internal List<InventoryIcon> _Icons = new();
 
 	public InventoryColumn( int i, Panel parent )
 	{
@@ -29,7 +29,7 @@ public class InventoryColumn : Panel
 		{
 			icon = new InventoryIcon( weapon );
 			icon.Parent = this;
-			this.Icons.Add( icon );
+			this._Icons.Add( icon );
 		}
 	}
 
@@ -37,9 +37,9 @@ public class InventoryColumn : Panel
 	{
 		this.SetClass( "active", selectedWeapon?.Bucket == this.Column );
 
-		for ( int i = 0; i < this.Icons.Count; i++ )
+		for ( int i = 0; i < this._Icons.Count; i++ )
 		{
-			this.Icons[i].TickSelection( selectedWeapon );
+			this._Icons[i].TickSelection( selectedWeapon );
 		}
 	}
 }

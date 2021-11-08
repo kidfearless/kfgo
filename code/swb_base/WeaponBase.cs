@@ -33,7 +33,7 @@ namespace SWB_Base
 			// Draw animation
 			if ( this.IsLocalPawn )
 			{
-				BaseViewModel activeViewModel = !this.DualWield ? this.ViewModelEntity : this.dualWieldViewModel;
+				BaseViewModel activeViewModel = !this.DualWield ? this.ViewModelEntity : this.DualWieldViewModel;
 
 				if ( this.Primary.Ammo == 0 && !string.IsNullOrEmpty( this.Primary.DrawEmptyAnim ) )
 				{
@@ -60,9 +60,9 @@ namespace SWB_Base
 			// Dualwield setup
 			if ( this.DualWield )
 			{
-				if ( !this.isDualWieldConverted )
+				if ( !this.IsDualWieldConverted )
 				{
-					this.isDualWieldConverted = true;
+					this.IsDualWieldConverted = true;
 					this.Primary.Ammo *= 2;
 					this.Primary.ClipSize *= 2;
 					this.Primary.RPM = (int)(this.Primary.RPM * 1.25);
@@ -76,9 +76,9 @@ namespace SWB_Base
 		{
 			base.ActiveEnd( ent, dropped );
 
-			if ( this.DualWield && this.dualWieldViewModel != null )
+			if ( this.DualWield && this.DualWieldViewModel != null )
 			{
-				this.dualWieldViewModel.Delete();
+				this.DualWieldViewModel.Delete();
 			}
 		}
 
@@ -197,14 +197,14 @@ namespace SWB_Base
 			this.IsReloading = false;
 
 			// Dual wield
-			if ( this.DualWield && !this.dualWieldShouldReload )
+			if ( this.DualWield && !this.DualWieldShouldReload )
 			{
-				this.dualWieldShouldReload = true;
+				this.DualWieldShouldReload = true;
 				this.Reload();
 				return;
 			}
 
-			this.dualWieldShouldReload = false;
+			this.DualWieldShouldReload = false;
 
 			if ( this.Primary.InfiniteAmmo == InfiniteAmmoType.Reserve )
 			{
@@ -234,7 +234,7 @@ namespace SWB_Base
 		[ClientRpc]
 		public virtual void StartReloadEffects( bool isEmpty, string reloadAnim = null )
 		{
-			BaseViewModel reloadingViewModel = this.DualWield && this.dualWieldShouldReload ? this.dualWieldViewModel : this.ViewModelEntity;
+			BaseViewModel reloadingViewModel = this.DualWield && this.DualWieldShouldReload ? this.DualWieldViewModel : this.ViewModelEntity;
 
 			if ( reloadAnim != null )
 			{
@@ -261,9 +261,9 @@ namespace SWB_Base
 			}
 
 			// Recoil
-			if ( this.doRecoil )
+			if ( this.DoRecoil )
 			{
-				this.doRecoil = false;
+				this.DoRecoil = false;
 				Angles recoilAngles = new Angles( this.IsZooming ? -this.Primary.Recoil * 0.4f : -this.Primary.Recoil, 0, 0 );
 				input.ViewAngles += recoilAngles;
 			}
@@ -288,18 +288,18 @@ namespace SWB_Base
 
 			if ( this.DualWield )
 			{
-				this.dualWieldViewModel = new ViewModelBase( this, true )
+				this.DualWieldViewModel = new ViewModelBase( this, true )
 				{
 					Owner = Owner,
 					EnableViewmodelRendering = true
 				};
-				this.dualWieldViewModel.SetModel( this.ViewModelPath );
+				this.DualWieldViewModel.SetModel( this.ViewModelPath );
 			}
 		}
 
 		public virtual ModelEntity GetEffectModel()
 		{
-			BaseViewModel animatingViewModel = this.DualWield && this.dualWieldLeftFire ? this.dualWieldViewModel : this.ViewModelEntity;
+			BaseViewModel animatingViewModel = this.DualWield && this.DualWieldLeftFire ? this.DualWieldViewModel : this.ViewModelEntity;
 			ModelEntity effectModel = animatingViewModel;
 
 			// We don't want to change the world effect origin if we or others can see it

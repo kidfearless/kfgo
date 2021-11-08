@@ -10,10 +10,9 @@ namespace SWB_Base
 
 	public partial class WeaponBase
 	{
-		private Panel healthDisplay;
-		private Panel ammoDisplay;
-
-		private Panel hitmarker;
+		protected Panel HealthDisplay { get; set; }
+		protected Panel AmmoDisplay { get; set; }
+		protected Panel Hitmarker { get; set; }
 
 		public override void CreateHudElements()
 		{
@@ -32,7 +31,7 @@ namespace SWB_Base
 
 			if ( this.UISettings.ShowHitmarker )
 			{
-				this.hitmarker = new Hitmarker
+				this.Hitmarker = new Hitmarker
 				{
 					Parent = Local.Hud
 				};
@@ -40,7 +39,7 @@ namespace SWB_Base
 
 			if ( this.UISettings.ShowHealthCount || this.UISettings.ShowHealthIcon )
 			{
-				this.healthDisplay = new HealthDisplay( this.UISettings )
+				this.HealthDisplay = new HealthDisplay( this.UISettings )
 				{
 					Parent = Local.Hud
 				};
@@ -48,7 +47,7 @@ namespace SWB_Base
 
 			if ( this.UISettings.ShowAmmoCount || this.UISettings.ShowWeaponIcon || this.UISettings.ShowFireMode )
 			{
-				this.ammoDisplay = new AmmoDisplay( this.UISettings )
+				this.AmmoDisplay = new AmmoDisplay( this.UISettings )
 				{
 					Parent = Local.Hud
 				};
@@ -59,19 +58,19 @@ namespace SWB_Base
 		{
 			base.DestroyHudElements();
 
-			if ( this.healthDisplay != null )
+			if ( this.HealthDisplay != null )
 			{
-				this.healthDisplay.Delete( true );
+				this.HealthDisplay.Delete( true );
 			}
 
-			if ( this.ammoDisplay != null )
+			if ( this.AmmoDisplay != null )
 			{
-				this.ammoDisplay.Delete( true );
+				this.AmmoDisplay.Delete( true );
 			}
 
-			if ( this.hitmarker != null )
+			if ( this.Hitmarker != null )
 			{
-				this.hitmarker.Delete( true );
+				this.Hitmarker.Delete( true );
 			}
 		}
 	}

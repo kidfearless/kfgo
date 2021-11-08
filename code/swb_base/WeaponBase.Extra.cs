@@ -55,7 +55,7 @@ namespace SWB_Base
 		// Barrel heat
 		public void AddBarrelHeat()
 		{
-			this.barrelHeat += 1;
+			this.BarrelHeat += 1;
 		}
 
 		[Event.Tick.Server]
@@ -63,7 +63,7 @@ namespace SWB_Base
 		{
 			if ( this.TimeSinceFired > 3 )
 			{
-				this.barrelHeat = 0;
+				this.BarrelHeat = 0;
 			}
 		}
 	}

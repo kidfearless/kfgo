@@ -30,6 +30,14 @@ namespace KFGO
 		public Duck Duck;
 		public Unstuck Unstuck;
 
+		bool _IsTouchingLadder = false;
+		Vector3 _LadderNormal;
+
+		protected Vector3 Mins { get; set; }
+		protected Vector3 Maxs { get; set; }
+		protected float SurfaceFriction { get; set; }
+
+
 		public Controller()
 		{
 			this.Duck = new Duck( this );
@@ -52,18 +60,17 @@ namespace KFGO
 		// Eye Height 64
 		// Duck Eye Height 28
 
-		protected Vector3 mins;
-		protected Vector3 maxs;
+
 
 		public virtual void SetBBox( Vector3 mins, Vector3 maxs )
 		{
-			if ( this.mins == mins && this.maxs == maxs )
+			if ( this.Mins == mins && this.Maxs == maxs )
 			{
 				return;
 			}
 
-			this.mins = mins;
-			this.maxs = maxs;
+			this.Mins = mins;
+			this.Maxs = maxs;
 		}
 
 		/// <summary>
@@ -81,7 +88,6 @@ namespace KFGO
 			this.SetBBox( mins, maxs );
 		}
 
-		protected float SurfaceFriction;
 
 		public override void FrameSimulate()
 		{
@@ -113,7 +119,7 @@ namespace KFGO
 			//
 			// Start Gravity
 			//
-			if ( !this.Swimming && !this.IsTouchingLadder )
+			if ( !this.Swimming && !this._IsTouchingLadder )
 			{
 				this.Velocity -= new Vector3( 0, 0, this.Gravity * 0.5f ) * Time.Delta;
 				this.Velocity += new Vector3( 0, 0, this.BaseVelocity.z ) * Time.Delta;
@@ -151,7 +157,7 @@ namespace KFGO
 			float inSpeed = this.WishVelocity.Length.Clamp( 0, 1 );
 			this.WishVelocity *= Input.Rotation;
 
-			if ( !this.Swimming && !this.IsTouchingLadder )
+			if ( !this.Swimming && !this._IsTouchingLadder )
 			{
 				this.WishVelocity = this.WishVelocity.WithZ( 0 );
 			}
@@ -169,7 +175,7 @@ namespace KFGO
 				this.ApplyFriction( 1 );
 				this.WaterMove();
 			}
-			else if ( this.IsTouchingLadder )
+			else if ( this._IsTouchingLadder )
 			{
 				this.LadderMove();
 			}
@@ -186,7 +192,7 @@ namespace KFGO
 			this.CategorizePosition( bStayOnGround );
 
 			// FinishGravity
-			if ( !this.Swimming && !this.IsTouchingLadder )
+			if ( !this.Swimming && !this._IsTouchingLadder )
 			{
 				this.Velocity -= new Vector3( 0, 0, this.Gravity * 0.5f ) * Time.Delta;
 			}
@@ -205,8 +211,8 @@ namespace KFGO
 
 			if ( Debug )
 			{
-				DebugOverlay.Box( this.Position + this.TraceOffset, this.mins, this.maxs, Color.Red );
-				DebugOverlay.Box( this.Position, this.mins, this.maxs, Color.Blue );
+				DebugOverlay.Box( this.Position + this.TraceOffset, this.Mins, this.Maxs, Color.Red );
+				DebugOverlay.Box( this.Position, this.Mins, this.Maxs, Color.Blue );
 
 				int lineOffset = 0;
 				if ( Host.IsServer )
@@ -316,7 +322,7 @@ namespace KFGO
 		public virtual void StepMove()
 		{
 			MoveHelper mover = new MoveHelper( this.Position, this.Velocity );
-			mover.Trace = mover.Trace.Size( this.mins, this.maxs ).Ignore( this.Pawn );
+			mover.Trace = mover.Trace.Size( this.Mins, this.Maxs ).Ignore( this.Pawn );
 			mover.MaxStandableAngle = this.GroundAngle;
 
 			mover.TryMoveWithStep( Time.Delta, this.StepSize );
@@ -328,7 +334,7 @@ namespace KFGO
 		public virtual void Move()
 		{
 			MoveHelper mover = new MoveHelper( this.Position, this.Velocity );
-			mover.Trace = mover.Trace.Size( this.mins, this.maxs ).Ignore( this.Pawn );
+			mover.Trace = mover.Trace.Size( this.Mins, this.Maxs ).Ignore( this.Pawn );
 			mover.MaxStandableAngle = this.GroundAngle;
 
 			mover.TryMove( Time.Delta );
@@ -496,45 +502,44 @@ namespace KFGO
 			this.Velocity -= this.BaseVelocity;
 		}
 
-		bool IsTouchingLadder = false;
-		Vector3 LadderNormal;
+
 
 		public virtual void CheckLadder()
 		{
-			if ( this.IsTouchingLadder && Input.Pressed( InputButton.Jump ) )
+			if ( this._IsTouchingLadder && Input.Pressed( InputButton.Jump ) )
 			{
-				this.Velocity = this.LadderNormal * 100.0f;
-				this.IsTouchingLadder = false;
+				this.Velocity = this._LadderNormal * 100.0f;
+				this._IsTouchingLadder = false;
 
 				return;
 			}
 
 			const float ladderDistance = 1.0f;
 			Vector3 start = this.Position;
-			Vector3 end = start + ((this.IsTouchingLadder ? (this.LadderNormal * -1.0f) : this.WishVelocity.Normal) * ladderDistance);
+			Vector3 end = start + ((this._IsTouchingLadder ? (this._LadderNormal * -1.0f) : this.WishVelocity.Normal) * ladderDistance);
 
 			TraceResult pm = Trace.Ray( start, end )
-								.Size( this.mins, this.maxs )
+								.Size( this.Mins, this.Maxs )
 								.HitLayer( CollisionLayer.All, false )
 								.HitLayer( CollisionLayer.LADDER, true )
 								.Ignore( this.Pawn )
 								.Run();
 
-			this.IsTouchingLadder = false;
+			this._IsTouchingLadder = false;
 
 			if ( pm.Hit )
 			{
-				this.IsTouchingLadder = true;
-				this.LadderNormal = pm.Normal;
+				this._IsTouchingLadder = true;
+				this._LadderNormal = pm.Normal;
 			}
 		}
 
 		public virtual void LadderMove()
 		{
 			Vector3 velocity = this.WishVelocity;
-			float normalDot = velocity.Dot( this.LadderNormal );
-			Vector3 cross = this.LadderNormal * normalDot;
-			this.Velocity = velocity - cross + (-normalDot * this.LadderNormal.Cross( Vector3.Up.Cross( this.LadderNormal ).Normal ));
+			float normalDot = velocity.Dot( this._LadderNormal );
+			Vector3 cross = this._LadderNormal * normalDot;
+			this.Velocity = velocity - cross + (-normalDot * this._LadderNormal.Cross( Vector3.Up.Cross( this._LadderNormal ).Normal ));
 
 			this.Move();
 		}
@@ -667,7 +672,7 @@ namespace KFGO
 		/// </summary>
 		public override TraceResult TraceBBox( Vector3 start, Vector3 end, float liftFeet = 0.0f )
 		{
-			return this.TraceBBox( start, end, this.mins, this.maxs, liftFeet );
+			return this.TraceBBox( start, end, this.Mins, this.Maxs, liftFeet );
 		}
 
 		/// <summary>

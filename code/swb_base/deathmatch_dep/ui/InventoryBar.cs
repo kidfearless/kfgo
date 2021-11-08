@@ -11,11 +11,11 @@ using System.Linq;
 /// </summary>
 public class InventoryBar : Panel
 {
-	List<InventoryColumn> columns = new();
-	List<WeaponBase> Weapons = new();
+	List<InventoryColumn> _Columns = new();
+	List<WeaponBase> _Weapons = new();
 
-	public bool IsOpen;
-	WeaponBase SelectedWeapon;
+	public bool IsOpen { get; set; }
+	WeaponBase _SelectedWeapon;
 
 	public InventoryBar()
 	{
@@ -24,7 +24,7 @@ public class InventoryBar : Panel
 		for ( int i = 0; i < 6; i++ )
 		{
 			InventoryColumn icon = new InventoryColumn( i, this );
-			this.columns.Add( icon );
+			this._Columns.Add( icon );
 		}
 	}
 
@@ -39,14 +39,14 @@ public class InventoryBar : Panel
 			return;
 		}
 
-		this.Weapons.Clear();
-		this.Weapons.AddRange( player.Children
+		this._Weapons.Clear();
+		this._Weapons.AddRange( player.Children
 			.Select( x => x as WeaponBase )
 			.Where( x => x.IsValid() && x.IsUsable() ) );
 
-		foreach ( WeaponBase weapon in this.Weapons )
+		foreach ( WeaponBase weapon in this._Weapons )
 		{
-			this.columns[weapon.Bucket].UpdateWeapon( weapon );
+			this._Columns[weapon.Bucket].UpdateWeapon( weapon );
 		}
 	}
 
@@ -69,7 +69,7 @@ public class InventoryBar : Panel
 		wantOpen = wantOpen || input.Pressed( InputButton.Slot5 );
 		wantOpen = wantOpen || input.Pressed( InputButton.Slot6 );
 
-		if ( this.Weapons.Count == 0 )
+		if ( this._Weapons.Count == 0 )
 		{
 			this.IsOpen = false;
 			return;
@@ -78,7 +78,7 @@ public class InventoryBar : Panel
 		// We're not open, but we want to be
 		if ( this.IsOpen != wantOpen )
 		{
-			this.SelectedWeapon = Local.Pawn.ActiveChild as WeaponBase;
+			this._SelectedWeapon = Local.Pawn.ActiveChild as WeaponBase;
 			this.IsOpen = true;
 		}
 
@@ -94,31 +94,31 @@ public class InventoryBar : Panel
 		if ( input.Down( InputButton.Attack1 ) )
 		{
 			input.SuppressButton( InputButton.Attack1 );
-			input.ActiveChild = this.SelectedWeapon;
+			input.ActiveChild = this._SelectedWeapon;
 			this.IsOpen = false;
 			Sound.FromScreen( "dm.ui_select" );
 			return;
 		}
 
 		// get our current index
-		WeaponBase oldSelected = this.SelectedWeapon;
-		int SelectedIndex = this.Weapons.IndexOf( this.SelectedWeapon );
+		WeaponBase oldSelected = this._SelectedWeapon;
+		int SelectedIndex = this._Weapons.IndexOf( this._SelectedWeapon );
 		SelectedIndex = this.SlotPressInput( input, SelectedIndex );
 
 		// forward if mouse wheel was pressed
 		SelectedIndex += input.MouseWheel;
-		SelectedIndex = SelectedIndex.UnsignedMod( this.Weapons.Count );
+		SelectedIndex = SelectedIndex.UnsignedMod( this._Weapons.Count );
 
-		this.SelectedWeapon = this.Weapons[SelectedIndex];
+		this._SelectedWeapon = this._Weapons[SelectedIndex];
 
 		for ( int i = 0; i < 6; i++ )
 		{
-			this.columns[i].TickSelection( this.SelectedWeapon );
+			this._Columns[i].TickSelection( this._SelectedWeapon );
 		}
 
 		input.MouseWheel = 0;
 
-		if ( oldSelected != this.SelectedWeapon )
+		if ( oldSelected != this._SelectedWeapon )
 		{
 			Sound.FromScreen( "dm.ui_tap" );
 		}
@@ -163,43 +163,43 @@ public class InventoryBar : Panel
 			return SelectedIndex;
 		}
 
-		if ( this.SelectedWeapon.IsValid() && this.SelectedWeapon.Bucket == columninput )
+		if ( this._SelectedWeapon.IsValid() && this._SelectedWeapon.Bucket == columninput )
 		{
 			return this.NextInBucket();
 		}
 
 		// Are we already selecting a weapon with this column?
-		WeaponBase firstOfColumn = this.Weapons.Where( x => x.Bucket == columninput ).OrderBy( x => x.BucketWeight ).FirstOrDefault();
+		WeaponBase firstOfColumn = this._Weapons.Where( x => x.Bucket == columninput ).OrderBy( x => x.BucketWeight ).FirstOrDefault();
 		if ( firstOfColumn == null )
 		{
 			// DOOP sound
 			return SelectedIndex;
 		}
 
-		return this.Weapons.IndexOf( firstOfColumn );
+		return this._Weapons.IndexOf( firstOfColumn );
 	}
 
 	int NextInBucket()
 	{
-		Assert.NotNull( this.SelectedWeapon );
+		Assert.NotNull( this._SelectedWeapon );
 
 		WeaponBase first = null;
 		WeaponBase prev = null;
-		foreach ( WeaponBase weapon in this.Weapons.Where( x => x.Bucket == this.SelectedWeapon.Bucket ).OrderBy( x => x.BucketWeight ) )
+		foreach ( WeaponBase weapon in this._Weapons.Where( x => x.Bucket == this._SelectedWeapon.Bucket ).OrderBy( x => x.BucketWeight ) )
 		{
 			if ( first == null )
 			{
 				first = weapon;
 			}
 
-			if ( prev == this.SelectedWeapon )
+			if ( prev == this._SelectedWeapon )
 			{
-				return this.Weapons.IndexOf( weapon );
+				return this._Weapons.IndexOf( weapon );
 			}
 
 			prev = weapon;
 		}
 
-		return this.Weapons.IndexOf( first );
+		return this._Weapons.IndexOf( first );
 	}
 }

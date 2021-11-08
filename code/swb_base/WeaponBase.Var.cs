@@ -71,15 +71,12 @@ namespace SWB_Base
 
 		public PickupTrigger PickupTrigger { get; protected set; }
 
-		// Private
-		private bool doRecoil = false;
-
-		private int barrelHeat = 0;
-		private TimeSince TimeSinceFired;
-
-		private BaseViewModel dualWieldViewModel;
-		private bool isDualWieldConverted = false;
-		private bool dualWieldLeftFire = false;
-		private bool dualWieldShouldReload = false;
+		protected bool DoRecoil { get; set; } = false;
+		protected int BarrelHeat { get; set; } = 0;
+		protected TimeSince TimeSinceFired { get; set; }
+		protected BaseViewModel DualWieldViewModel { get; set; }
+		protected bool IsDualWieldConverted { get; set; } = false;
+		protected bool DualWieldLeftFire { get; set; } = false;
+		protected bool DualWieldShouldReload { get; set; } = false;
 	}
 }

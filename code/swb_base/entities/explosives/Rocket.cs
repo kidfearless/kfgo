@@ -23,23 +23,23 @@ namespace SWB_Base
 		public string RocketSmokeEffect { get; set; }
 		public int Inaccuracy { get; set; } = 0; // How Inaccurate is the rocket (higher = less accurate)
 
-		private TimeSince timeSince;
-		private List<Particles> rocketParticles = new List<Particles>();
-		private Sound rocketLoopSound;
+		private TimeSince _TimeSince;
+		private List<Particles> _RocketParticles = new List<Particles>();
+		private Sound _RocketLoopSound;
 
 		public override void Start()
 		{
 			base.Start();
-			this.timeSince = 0;
+			this._TimeSince = 0;
 
 			if ( !string.IsNullOrEmpty( this.RocketSound ) )
 			{
-				this.rocketLoopSound = this.PlaySound( this.RocketSound );
+				this._RocketLoopSound = this.PlaySound( this.RocketSound );
 			}
 
 			for ( int i = 0; i < this.RocketEffects.Count; i++ )
 			{
-				this.rocketParticles.Add( Particles.Create( this.RocketEffects[i], this, null, true ) );
+				this._RocketParticles.Add( Particles.Create( this.RocketEffects[i], this, null, true ) );
 			}
 		}
 
@@ -58,24 +58,24 @@ namespace SWB_Base
 			// Rocket flight
 			Vector3 downForce = this.Rotation.Down * 4;
 			Random random = new Random();
-			int timeSinceMod = (int)Math.Max( 0, this.Inaccuracy * this.timeSince );
+			int timeSinceMod = (int)Math.Max( 0, this.Inaccuracy * this._TimeSince );
 			Vector3 sideForce = this.Rotation.Left * ((random.Next( 0, timeSinceMod ) * 2) - timeSinceMod);
 
 			this.Velocity += downForce + sideForce;
 
 			// Update sound
-			this.rocketLoopSound.SetPosition( this.Position );
+			this._RocketLoopSound.SetPosition( this.Position );
 		}
 
 		public virtual void Explode()
 		{
 			// Stop loop sound
-			this.rocketLoopSound.Stop();
+			this._RocketLoopSound.Stop();
 
 			// Stop rocket particles
-			for ( int i = 0; i < this.rocketParticles.Count; i++ )
+			for ( int i = 0; i < this._RocketParticles.Count; i++ )
 			{
-				this.rocketParticles[i].Destroy( false );
+				this._RocketParticles[i].Destroy( false );
 			}
 
 			// Explosion sound

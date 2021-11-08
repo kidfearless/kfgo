@@ -10,17 +10,17 @@ namespace SWB_Base
 	public class Crosshair : Panel
 	{
 
-		Panel CenterDot;
-		Panel LeftBar;
-		Panel RightBar;
-		Panel TopBar;
-		Panel BottomBar;
+		protected Panel CenterDot { get; set; }
+		protected Panel LeftBar { get; set; }
+		protected Panel RightBar { get; set; }
+		protected Panel TopBar { get; set; }
+		protected Panel BottomBar { get; set; }
 
-		private int spreadOffset = 400;
-		private int sprintOffset = 100;
-		private int fireOffset = 50;
+		protected int SpreadOffset { get; set; } = 400;
+		protected int SprintOffset { get; set; } = 100;
+		protected int FireOffset { get; set; } = 50;
 
-		private bool wasZooming = false;
+		protected bool WasZooming { get; set; } = false;
 
 		public Crosshair()
 		{
@@ -101,7 +101,7 @@ namespace SWB_Base
 			}
 
 			// Crosshair spread offset
-			float screenOffset = this.spreadOffset * weapon.GetRealSpread();
+			float screenOffset = this.SpreadOffset * weapon.GetRealSpread();
 			this.LeftBar.Style.MarginLeft = -screenOffset;
 			this.RightBar.Style.MarginLeft = screenOffset;
 			this.TopBar.Style.MarginTop = -screenOffset;
@@ -110,16 +110,16 @@ namespace SWB_Base
 			// Sprint spread offsets
 			if ( weapon.IsRunning || weapon.ShouldTuck() || weapon.IsReloading )
 			{
-				this.LeftBar.Style.Left = -this.sprintOffset;
-				this.RightBar.Style.Left = this.sprintOffset - 5;
-				this.TopBar.Style.Top = -this.sprintOffset;
-				this.BottomBar.Style.Top = this.sprintOffset - 5;
+				this.LeftBar.Style.Left = -this.SprintOffset;
+				this.RightBar.Style.Left = this.SprintOffset - 5;
+				this.TopBar.Style.Top = -this.SprintOffset;
+				this.BottomBar.Style.Top = this.SprintOffset - 5;
 
 				this.HideBarLines();
 			}
 			else if ( weapon.IsZooming )
 			{
-				this.wasZooming = true;
+				this.WasZooming = true;
 
 				if ( player.IsFirstPersonMode )
 				{
@@ -127,9 +127,9 @@ namespace SWB_Base
 					this.HideBarLines();
 				}
 			}
-			else if ( this.LeftBar.Style.Left == -this.sprintOffset || this.wasZooming )
+			else if ( this.LeftBar.Style.Left == -this.SprintOffset || this.WasZooming )
 			{
-				this.wasZooming = false;
+				this.WasZooming = false;
 				this.RestoreBarPositions();
 				this.RestoreCrosshairOpacity();
 			}
@@ -141,10 +141,10 @@ namespace SWB_Base
 		public void FireEvent( float fireDelay )
 		{
 			// Fire spread offsets
-			this.LeftBar.Style.Left = -this.fireOffset;
-			this.RightBar.Style.Left = this.fireOffset - 5;
-			this.TopBar.Style.Top = -this.fireOffset;
-			this.BottomBar.Style.Top = this.fireOffset - 5;
+			this.LeftBar.Style.Left = -this.FireOffset;
+			this.RightBar.Style.Left = this.FireOffset - 5;
+			this.TopBar.Style.Top = -this.FireOffset;
+			this.BottomBar.Style.Top = this.FireOffset - 5;
 
 			_ = this.FireDelay( fireDelay / 2 );
 		}

@@ -6,7 +6,7 @@ namespace SWB_Base
 	{
 		// TODO - make ragdolls one per entity
 		// TODO - make ragdolls dissapear after a load of seconds
-		static EntityLimit RagdollLimit = new EntityLimit() { MaxTotal = 20 };
+		static EntityLimit _RagdollLimit = new EntityLimit() { MaxTotal = 20 };
 
 		[ClientRpc]
 		protected virtual void BecomeRagdollOnClient( Vector3 force, int forceBone )
@@ -64,7 +64,7 @@ namespace SWB_Base
 
 			this.Corpse = ent;
 
-			RagdollLimit.Watch( ent );
+			_RagdollLimit.Watch( ent );
 		}
 	}
 }

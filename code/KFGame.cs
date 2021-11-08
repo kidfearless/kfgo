@@ -9,12 +9,12 @@ namespace KFGO
 
 	public partial class KFGame : Sandbox.Game
 	{
-		private static KFGame _instance;
+		private static KFGame _Instance;
 
-		public static new KFGame Current => _instance;
+		public static new KFGame Current => _Instance;
 
 		public static event HotReload HotReload;
-		private static DateTime LastHotReloadTime;
+		private static DateTime _LastHotReloadTime;
 
 		public static bool TryInvokeHotReload( DateTime time )
 		{
@@ -22,7 +22,7 @@ namespace KFGO
 			//{
 			//	return false;
 			//}
-			if ( time - LastHotReloadTime > TimeSpan.FromSeconds( 0.1 ) )
+			if ( time - _LastHotReloadTime > TimeSpan.FromSeconds( 0.1 ) )
 			{
 				HotReload?.Invoke( time );
 				if ( !Host.IsServer )
@@ -30,7 +30,7 @@ namespace KFGO
 					Admin_HotLoad();
 				}
 
-				LastHotReloadTime = time;
+				_LastHotReloadTime = time;
 				return true;
 			}
 
@@ -53,7 +53,7 @@ namespace KFGO
 
 		public KFGame()
 		{
-			_instance = this;
+			_Instance = this;
 			Global.TickRate = 128;
 			KFGame.HotReload += this.KFGame_HotReload;
 			this.InitializeGame();

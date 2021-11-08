@@ -8,27 +8,27 @@ using System;
 
 public class HealthDisplay : Panel
 {
-	Panel healthWrapper;
-
-	Image healthIcon;
-	Label healthLabel;
+	protected Panel HealthWrapper { get; set; }
+	protected Image HealthIcon { get; set; }
+	protected Label HealthLabel { get; set; }
 
 	public HealthDisplay( UISettings uiSettings )
 	{
 		this.StyleSheet.Load( "/swb_base/ui/HealthDisplay.scss" );
 
-		this.healthWrapper = this.Add.Panel( "healthWrapper" );
+		this.HealthWrapper = this.Add.Panel( "healthWrapper" );
 
 		if ( uiSettings.ShowHealthIcon )
 		{
-			this.healthIcon = this.healthWrapper.Add.Image( "/materials/swb/hud/health.png", "healthIcon" );
+			this.HealthIcon = this.HealthWrapper.Add.Image( "/materials/swb/hud/health.png", "healthIcon" );
 		}
 
 		if ( uiSettings.ShowHealthCount )
 		{
-			this.healthLabel = this.healthWrapper.Add.Label( "", "healthLabel" );
+			this.HealthLabel = this.HealthWrapper.Add.Label( "", "healthLabel" );
 		}
 	}
+
 
 	public override void Tick()
 	{
@@ -48,15 +48,15 @@ public class HealthDisplay : Panel
 		double health = Math.Round( player.Health );
 		float healthPer = ((float)health) / 100f;
 
-		if ( this.healthIcon != null )
+		if ( this.HealthIcon != null )
 		{
-			this.healthIcon.Style.Opacity = 1; // healthPer
+			this.HealthIcon.Style.Opacity = 1; // healthPer
 		}
 
-		if ( this.healthLabel != null )
+		if ( this.HealthLabel != null )
 		{
-			this.healthLabel.SetText( health.ToString() );
-			this.healthLabel.Style.FontColor = new Color( 1, 1 * healthPer, 1 * healthPer );
+			this.HealthLabel.SetText( health.ToString() );
+			this.HealthLabel.Style.FontColor = new Color( 1, 1 * healthPer, 1 * healthPer );
 		}
 	}
 }

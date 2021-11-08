@@ -16,10 +16,10 @@ namespace SWB_Base
 		public virtual float ZoomAmount => 20f; // The amount to zoom in ( lower is more )
 		public virtual bool UseRenderTarget => false; // EXPERIMENTAL - Use a render target instead of a full screen texture zoom
 
-		private Panel SniperScopePanel;
-		private bool switchBackToThirdP = false;
-		private float lerpZoomAmount = 0;
-		private float oldSpread = -1;
+		protected Panel SniperScopePanel { get; set; }
+		protected bool SwitchBackToThirdP { get; set; } = false;
+		protected float LerpZoomAmount { get; set; } = 0;
+		protected float OldSpread { get; set; } = -1;
 
 		public override void ActiveStart( Entity ent )
 		{
@@ -37,9 +37,9 @@ namespace SWB_Base
 		{
 			this.IsScoped = true;
 
-			if ( this.oldSpread == -1 )
+			if ( this.OldSpread == -1 )
 			{
-				this.oldSpread = this.Primary.Spread;
+				this.OldSpread = this.Primary.Spread;
 			}
 
 			this.Primary.Spread = 0;
@@ -48,7 +48,7 @@ namespace SWB_Base
 			{
 				if ( this.Owner.Camera is ThirdPersonCamera )
 				{
-					this.switchBackToThirdP = true;
+					this.SwitchBackToThirdP = true;
 					this.Owner.Camera = new FirstPersonCamera();
 				}
 			}
@@ -67,12 +67,12 @@ namespace SWB_Base
 		public virtual void OnScopedEnd()
 		{
 			this.IsScoped = false;
-			this.Primary.Spread = this.oldSpread;
-			this.lerpZoomAmount = 0;
+			this.Primary.Spread = this.OldSpread;
+			this.LerpZoomAmount = 0;
 
-			if ( this.IsServer && this.switchBackToThirdP )
+			if ( this.IsServer && this.SwitchBackToThirdP )
 			{
-				this.switchBackToThirdP = false;
+				this.SwitchBackToThirdP = false;
 				this.Owner.Camera = new ThirdPersonCamera();
 			}
 
@@ -129,13 +129,13 @@ namespace SWB_Base
 
 			if ( this.IsScoped )
 			{
-				if ( this.lerpZoomAmount == 0 )
+				if ( this.LerpZoomAmount == 0 )
 				{
-					this.lerpZoomAmount = camSetup.FieldOfView;
+					this.LerpZoomAmount = camSetup.FieldOfView;
 				}
 
-				this.lerpZoomAmount = MathUtil.FILerp( this.lerpZoomAmount, this.ZoomAmount, 10f );
-				camSetup.FieldOfView = this.lerpZoomAmount;
+				this.LerpZoomAmount = MathUtil.FILerp( this.LerpZoomAmount, this.ZoomAmount, 10f );
+				camSetup.FieldOfView = this.LerpZoomAmount;
 			}
 		}
 	}
