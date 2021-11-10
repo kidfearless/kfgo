@@ -1,45 +1,47 @@
-﻿using Sandbox.UI;
-using Sandbox.UI.Construct;
+﻿//using KFGO.UI;
 
-using SWB_Base;
+//using Sandbox.UI;
+//using Sandbox.UI.Construct;
 
-using System.Collections.Generic;
-using System.Linq;
+//using SWB_Base;
 
-public class InventoryColumn : Panel
-{
-	public int Column;
-	public bool IsSelected;
-	public Label Header;
-	public int SelectedIndex;
+//using System.Collections.Generic;
+//using System.Linq;
 
-	internal List<InventoryIcon> _Icons = new();
+//public class InventoryColumn:Panel
+//{
+//	public int Column;
+//	public bool IsSelected;
+//	public Label Header;
+//	public int SelectedIndex;
 
-	public InventoryColumn( int i, Panel parent )
-	{
-		this.Parent = parent;
-		this.Column = i;
-		this.Header = this.Add.Label( $"{i + 1}", "slot-number" );
-	}
+//	internal List<InventoryIcon> _Icons = new();
 
-	internal void UpdateWeapon( WeaponBase weapon )
-	{
-		InventoryIcon icon = this.ChildrenOfType<InventoryIcon>().FirstOrDefault( x => x.Weapon == weapon );
-		if ( icon == null )
-		{
-			icon = new InventoryIcon( weapon );
-			icon.Parent = this;
-			this._Icons.Add( icon );
-		}
-	}
+//	public InventoryColumn( int i, Panel parent )
+//	{
+//		this.Parent = parent;
+//		this.Column = i;
+//		this.Header = this.Add.Label( $"{i + 1}", "slot-number" );
+//	}
 
-	internal void TickSelection( WeaponBase selectedWeapon )
-	{
-		this.SetClass( "active", selectedWeapon?.Bucket == this.Column );
+//	internal void UpdateWeapon( WeaponBase weapon )
+//	{
+//		InventoryIcon icon = this.ChildrenOfType<InventoryIcon>().FirstOrDefault( x => x.Weapon == weapon );
+//		if ( icon == null )
+//		{
+//			icon = new InventoryIcon( weapon );
+//			icon.Parent = this;
+//			this._Icons.Add( icon );
+//		}
+//	}
 
-		for ( int i = 0; i < this._Icons.Count; i++ )
-		{
-			this._Icons[i].TickSelection( selectedWeapon );
-		}
-	}
-}
+//	internal void TickSelection( WeaponBase selectedWeapon )
+//	{
+//		this.SetClass( "active", selectedWeapon?.Bucket == this.Column );
+
+//		for ( int i = 0; i < this._Icons.Count; i++ )
+//		{
+//			this._Icons[i].TickSelection( selectedWeapon );
+//		}
+//	}
+//}

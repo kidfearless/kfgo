@@ -1,4 +1,6 @@
-﻿using Sandbox;
+﻿using KFGO;
+
+using Sandbox;
 using Sandbox.UI;
 
 using SWB_Base;
@@ -14,85 +16,43 @@ namespace SWB_Base
 		BurstFire
 	}
 
-
-	public struct ValueClipInfo
-	{
-		public int Ammo { get; set; }
-		public AmmoType AmmoType { get; set; }
-		public int ClipSize { get; set; }
-		public float ReloadTime { get; set; }
-		public float ReloadEmptyTime { get; set; }
-		public int Bullets { get; set; }
-		public float BulletSize { get; set; }
-		public float Damage { get; set; }
-		public float Force { get; set; }
-		public float Spread { get; set; }
-		public float Recoil { get; set; }
-		public int RPM { get; set; }
-		public FiringType FiringType { get; set; }
-		public ScreenShake ScreenShake { get; set; }
-		//public string ShootAnim { get; set; }
-		//public string ReloadAnim { get; set; }
-		//public string ReloadEmptyAnim { get; set; }
-		//public string DrawAnim { get; set; }
-		//public string DrawEmptyAnim { get; set; }
-		//public string DryFireSound { get; set; }
-		//public string ShootSound { get; set; }
-		//public string BulletEjectParticle { get; set; }
-		//public string MuzzleFlashParticle { get; set; }
-		//public string BarrelSmokeParticle { get; set; }
-		//public string BulletTracerParticle { get; set; }
-		public InfiniteAmmoType InfiniteAmmo { get; set; }
-
-		public static ValueClipInfo Create() => new()
-		{
-			Ammo = 10, // Amount of ammo in the clip
-			AmmoType = AmmoType.Pistol, // Type of ammo
-			ClipSize = 10, // Size of the clip
-			ReloadTime = 1f, // Duration of the reload animation
-			ReloadEmptyTime = -1f, // Duration of the empty reload animation
-			Bullets = 1, // Amount of bullets per shot
-			BulletSize = 0.1f, // Bullet size
-			Damage = 5, // Bullet damage
-			Force = 0.1f, // Bullet force
-			Spread = 0.1f, // Weapon spread
-			Recoil = 0.1f, // Weapon recoil
-			RPM = 200, // Firing speed ( higher is faster )
-			FiringType = FiringType.SemiAutomatic, // Firing type
-			ScreenShake = default, // Screenshake per shot
-			//ShootAnim = "fire", // Shooting animation
-			//ReloadAnim = "reload", // Reloading animation
-			//ReloadEmptyAnim = "reload_empty", // Reloading animation when clip is empty
-			//DrawAnim = "deploy", // Draw animation
-			//DrawEmptyAnim = "", // Draw animation when there is no ammo
-			//DryFireSound = default, // Firing sound when clip is empty
-			//ShootSound = default, // Firing sound
-			//BulletEjectParticle = default,  // Particle that should be used for bullet ejection
-			//MuzzleFlashParticle = default,  // Particle that should be used for the muzzle flash
-			//BarrelSmokeParticle = "particles/swb/muzzle/barrel_smoke.vpcf", // Particle that should be used for the barrel smoke
-			//BulletTracerParticle = "particles/swb/tracer/tracer_medium.vpcf", // Particle that should be used for the barrel smoke
-			InfiniteAmmo = InfiniteAmmoType.Normal, // If the weapon should have infinite ammo
-		};
-	}
-
-	public partial class ClipInfo : BaseNetworkable
+	public partial class ClipInfo : BaseNetworkable, IClipInfo
 	{
 		public ClipInfo()
 		{
 
 		}
 
-		public ClipInfo(ValueClipInfo value)
+		public ClipInfo( IClipInfo clip )
 		{
-			this.ClipInfoValue = value;
+			this.Ammo = clip.Ammo;
+			this.AmmoType = clip.AmmoType;
+			this.ClipSize = clip.ClipSize;
+			this.ReloadTime = clip.ReloadTime;
+			this.ReloadEmptyTime = clip.ReloadEmptyTime;
+			this.Bullets = clip.Bullets;
+			this.BulletSize = clip.BulletSize;
+			this.Damage = clip.Damage;
+			this.Force = clip.Force;
+			this.Spread = clip.Spread;
+			this.Recoil = clip.Recoil;
+			this.RPM = clip.RPM;
+			this.FiringType = clip.FiringType;
+			this.ScreenShake = clip.ScreenShake;
+			this.ShootAnim = clip.ShootAnim;
+			this.ReloadAnim = clip.ReloadAnim;
+			this.ReloadEmptyAnim = clip.ReloadEmptyAnim;
+			this.DrawAnim = clip.DrawAnim;
+			this.DrawEmptyAnim = clip.DrawEmptyAnim;
+			this.DryFireSound = clip.DryFireSound;
+			this.ShootSound = clip.ShootSound;
+			this.BulletEjectParticle = clip.BulletEjectParticle;
+			this.MuzzleFlashParticle = clip.MuzzleFlashParticle;
+			this.BarrelSmokeParticle = clip.BarrelSmokeParticle;
+			this.BulletTracerParticle = clip.BulletTracerParticle;
+			this.InfiniteAmmo = clip.InfiniteAmmo;
+
 		}
-
-		public ValueClipInfo Info;
-
-		[Net]
-		public ValueClipInfo ClipInfoValue { get => Info; set => Info = value; }
-
-
 
 		[Net]
 		public int Ammo { get; set; } = 10; // Amount of ammo in the clip

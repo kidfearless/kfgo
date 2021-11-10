@@ -45,8 +45,8 @@ namespace KFGO
 
 			//this.Inventory.Add( new SWB_CSS.Knife(), true );
 
-			this.Inventory.Add(MAC10.Create(), true);
-			// this.Inventory.Add( KFGame.Current.WeaponData.CreateWeaponByName<AK47>(nameof(AK47)), true );
+			//this.Inventory.Add(MAC10.Create(), true);
+			this.Inventory.Add( KFGame.Current.WeaponData.CreateWeaponByName<AK47>(nameof(AK47)), true );
 		}
 
 

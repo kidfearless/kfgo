@@ -43,7 +43,7 @@ namespace SWB_Base
 
 		public override void Reload()
 		{
-			this.Primary.Info.ReloadTime = this.ShellReloadTimeStart;
+			this.Primary.ReloadTime = this.ShellReloadTimeStart;
 			base.Reload();
 		}
 

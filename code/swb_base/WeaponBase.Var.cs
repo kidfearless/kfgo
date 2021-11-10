@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 
+using System;
 using System.Collections.Generic;
 
 namespace SWB_Base
@@ -10,38 +11,42 @@ namespace SWB_Base
 		Rifle = 2,
 		Shotgun = 3
 	}
-
 	public partial class WeaponBase
 	{
 		// Virtual
-		public virtual int Bucket => 1; // Inventory slot position
-		public virtual int BucketWeight => 100; // Inventory slot position weight ( higher = more important )
-		public virtual bool CanDrop => true; // Can manually drop weapon
-		public virtual bool DropWeaponOnDeath => true; // Drop the weapon on death
-		public virtual bool BulletCocking => true; // Can bullets be cocked in the barrel? ( clip ammo + 1 )
-		public virtual bool BarrelSmoking => true; // Should the barrel smoke after heavy weapon usage?
-		public virtual string FreezeViewModelOnZoom => null; // Some weapons have looping idle animations -> force spam another animation to "freeze" it
-		public virtual int FOV => 65; // Default FOV
-		public virtual int ZoomFOV => 65; // FOV while zooming
-		public virtual float TuckRange => 30; // Range that tucking should be enabled (set to -1 to disable tucking)
-		public virtual HoldType HoldType => HoldType.Pistol; // Thirdperson holdtype
-		public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl"; // Path to the view model
-		public virtual string WorldModelPath => "weapons/rust_pistol/rust_pistol.vmdl"; // Path to the world model
-		public virtual string Icon => ""; // Path to an image that represent the weapon on the HUD
-		public virtual float WalkAnimationSpeedMod => 1; // Procedural animation speed ( lower is slower )
-		public virtual float AimSensitivity => 0.85f; // Aim sensitivity while zooming ( lower is slower )
-		public virtual bool DualWield => false; // If the weapon should be dual wielded
-		public virtual float PrimaryDelay => -1; // Delay before firing when the primary attack button is pressed
-		public virtual float SecondaryDelay => -1; // Delay before firing when the secondary attack button is pressed
+		public virtual int Bucket { get; set; } = 1; // Inventory slot position
+		public virtual int BucketWeight { get; set; } = 100; // Inventory slot position weight ( higher = more important )
+		public virtual bool CanDrop { get; set; } = true; // Can manually drop weapon
+		public virtual bool DropWeaponOnDeath { get; set; } = true; // Drop the weapon on death
+		public virtual bool BulletCocking { get; set; } = true; // Can bullets be cocked in the barrel? ( clip ammo + 1 )
+		public virtual bool BarrelSmoking { get; set; } = true; // Should the barrel smoke after heavy weapon usage?
+		public virtual string FreezeViewModelOnZoom { get; set; } = null; // Some weapons have looping idle animations -> force spam another animation to "freeze" it
+		public virtual int FOV { get; set; } = 65; // Default FOV
+		public virtual int ZoomFOV { get; set; } = 65; // FOV while zooming
+		public virtual float TuckRange { get; set; } = 30; // Range that tucking should be enabled (set to -1 to disable tucking)
+		public virtual HoldType HoldType { get; set; } = HoldType.Pistol; // Thirdperson holdtype
+		private string _ViewModelPath = "weapons/rust_pistol/v_rust_pistol.vmdl";
+		[Obsolete("ViewModelPath has not set available setter, use ViewModel instead")]
+		public override string ViewModelPath { get => _ViewModelPath; } // Path to the view model
+		public virtual string ViewModel { get => _ViewModelPath; set => _ViewModelPath = value; }
+		public virtual string WorldModelPath { get; set; } = "weapons/rust_pistol/rust_pistol.vmdl"; // Path to the world model
+		public virtual string Icon { get; set; } = ""; // Path to an image that represent the weapon on the HUD
+		public virtual float WalkAnimationSpeedMod { get; set; } = 1; // Procedural animation speed ( lower is slower )
+		public virtual float AimSensitivity { get; set; } = 0.85f; // Aim sensitivity while zooming ( lower is slower )
+		public virtual bool DualWield { get; set; } = false; // If the weapon should be dual wielded
+		public virtual float PrimaryDelay { get; set; } = -1; // Delay before firing when the primary attack button is pressed
+		public virtual float SecondaryDelay { get; set; } = -1; // Delay before firing when the secondary attack button is pressed
+
+		public AngPos ZoomAnimData { get; set; } // Data used for setting the weapon to its zoom position
+
+		public AngPos RunAnimData { get; set; } // Data used for setting the weapon to its run position
+
+		//public override string ViewModelPath => this.ViewModelPath;
 
 		// Properties
 		public string PrintName { get { return this.ClassInfo.Title; } }
 
 		public List<AnimatedAction> AnimatedActions { get; set; } // Extra actions that use certain key combinations to trigger animations
-
-		public AngPos ZoomAnimData { get; set; } // Data used for setting the weapon to its zoom position
-
-		public AngPos RunAnimData { get; set; } // Data used for setting the weapon to its run position
 
 		public UISettings UISettings { get; set; } = new UISettings();
 

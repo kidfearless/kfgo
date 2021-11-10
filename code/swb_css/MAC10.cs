@@ -19,15 +19,12 @@ namespace SWB_CSS
 		public static MAC10 Create()
 		{
 			var t = new MAC10();
-			var clip = ValueClipInfo.Create();
-			clip.ReloadTime = 0.1f;
 			t.Primary = new ClipInfo
 			{
 				Ammo = 32,
 				AmmoType = AmmoType.SMG,
 				ClipSize = 32,
 				ReloadTime = 3.14f,
-				ClipInfoValue = clip,
 
 				BulletSize = 2f,
 				Damage = 12f,
@@ -36,7 +33,7 @@ namespace SWB_CSS
 				Recoil = 0.9f,
 				RPM = 1090,
 				FiringType = FiringType.Automatic,
-				ScreenShake = new ScreenShake
+				ScreenShake = new ScreenShake()
 				{
 					Length = 0.5f,
 					Speed = 4.0f,
@@ -53,13 +50,13 @@ namespace SWB_CSS
 				InfiniteAmmo = InfiniteAmmoType.Reserve
 			};
 
-			t.ZoomAnimData = new AngPos
+			t.ZoomAnimData = new AngPos()
 			{
 				Angle = new Angles( -0.7f, -5.4f, -7f ),
 				Pos = new Vector3( -6.94f, 0f, 2.9f )
 			};
 
-			t.RunAnimData = new AngPos
+			t.RunAnimData = new AngPos()
 			{
 				Angle = new Angles( 10, 40, 0 ),
 				Pos = new Vector3( 5, 0, 0 )

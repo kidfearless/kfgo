@@ -18,36 +18,36 @@ namespace SWB_CSS
 
 		public AK47()
 		{
-			this.Primary = new ClipInfo
-			{
-				Ammo = 30,
-				AmmoType = AmmoType.Rifle,
-				ClipSize = 30,
-				ReloadTime = 2.17f,
+			//this.Primary = new ClipInfo
+			//{
+			//	Ammo = 30,
+			//	AmmoType = AmmoType.Rifle,
+			//	ClipSize = 30,
+			//	ReloadTime = 2.17f,
 
-				BulletSize = 4f,
-				Damage = 15f,
-				Force = 3f,
-				Spread = 0.1f,
-				Recoil = 0.5f,
-				RPM = 600,
-				FiringType = FiringType.Automatic,
-				ScreenShake = new ScreenShake
-				{
-					Length = 0.5f,
-					Speed = 4.0f,
-					Size = 0.5f,
-					Rotation = 0.5f
-				},
+			//	BulletSize = 4f,
+			//	Damage = 15f,
+			//	Force = 3f,
+			//	Spread = 0.1f,
+			//	Recoil = 0.5f,
+			//	RPM = 600,
+			//	FiringType = FiringType.Automatic,
+			//	ScreenShake = new ScreenShake
+			//	{
+			//		Length = 0.5f,
+			//		Speed = 4.0f,
+			//		Size = 0.5f,
+			//		Rotation = 0.5f
+			//	},
 
-				DryFireSound = "swb_rifle.empty",
-				ShootSound = "css_ak47.fire",
+			//	DryFireSound = "swb_rifle.empty",
+			//	ShootSound = "css_ak47.fire",
 
-				BulletEjectParticle = "particles/pistol_ejectbrass.vpcf",
-				MuzzleFlashParticle = "particles/swb/muzzle/flash_medium.vpcf",
+			//	BulletEjectParticle = "particles/pistol_ejectbrass.vpcf",
+			//	MuzzleFlashParticle = "particles/swb/muzzle/flash_medium.vpcf",
 
-				InfiniteAmmo = InfiniteAmmoType.Reserve
-			};
+			//	InfiniteAmmo = InfiniteAmmoType.Reserve
+			//};
 
 			this.ZoomAnimData = new AngPos
 			{

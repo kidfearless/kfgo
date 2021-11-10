@@ -1,0 +1,58 @@
+{
+	"BaseWeapons": [
+		{
+			"Name": "AK47",
+			"PrimaryClip": "AK47_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "AK47_Attributes"
+		}
+	],
+	"Clips": [
+		{
+			"Name": "AK47_Primary_Clip",
+			"Ammo": 30,
+			"AmmoType": "Rifle",
+			"ClipSize": 30,
+			"ReloadTime": 2.17,
+			"BulletSize": 4,
+			"Damage": 15,
+			"Force": 3,
+			"Spread": 0.1,
+			"Recoil": 0.5,
+			"RPM": 600,
+			"FiringType": "Automatic",
+			"ScreenShake": {
+				"Length": 0.5,
+				"Speed": 4.0,
+				"Size": 0.5,
+				"Rotation": 0.5
+			},
+			"DryFireSound": "swb_rifle.empty",
+			"ShootSound": "css_ak47.fire",
+			"BulletEjectParticle": "particles/pistol_ejectbrass.vpcf",
+			"MuzzleFlashParticle": "particles/swb/muzzle/flash_medium.vpcf",
+			"InfiniteAmmo": "Reserve"
+		}
+	],
+	"WeaponAttributes": [
+		{
+			"Name": "AK47_Attributes",
+			"Bucket": 3,
+			"HoldType": "Rifle",
+			"ViewModelPath": "weapons/swb/css/ak47/css_v_rif_ak47.vmdl",
+			"WorldModelPath": "weapons/swb/css/ak47/css_w_rif_ak47.vmdl",
+			"Icon": "/swb_css/textures/ui/css_icon_ak47.png",
+			"FOV": 75,
+			"ZoomFOV": 35,
+			"WalkAnimationSpeedMod": 0.85,
+			"ZoomAnimData": {
+				"Angle": "-2.3, -0.05, 0",
+				"Pos": "-6.085, 0, 2.2"
+			},
+			"RunAnimData": {
+				"Angle": "10, 40, 0",
+				"Pos": "5, 0, 0"
+			}
+		}
+	]
+}

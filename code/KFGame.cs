@@ -9,12 +9,14 @@ namespace KFGO
 
 	public partial class KFGame : Sandbox.Game
 	{
+		private static DateTime _LastHotReloadTime;
 		private static KFGame _Instance;
 
 		public static new KFGame Current => _Instance;
-
 		public static event HotReload HotReload;
-		private static DateTime _LastHotReloadTime;
+		public WeaponDataParser WeaponData { get; private set; }
+
+
 
 		public static bool TryInvokeHotReload( DateTime time )
 		{
@@ -61,7 +63,7 @@ namespace KFGO
 
 		private void KFGame_HotReload( DateTime dateTime )
 		{
-			//InitializeGame();
+			InitializeGame();
 			if ( !this.IsServer )
 			{
 				return;
@@ -79,7 +81,9 @@ namespace KFGO
 			if ( this.IsServer )
 			{
 				Log.Info( "My Gamemode Has Created Serverside!" );
-				_ = new DeathmatchHud();
+				_ = new KFHud();
+				this.WeaponData = new WeaponDataParser();
+				this.WeaponData.Parse();
 			}
 
 			if ( this.IsClient )

@@ -14,16 +14,6 @@
 ]
 
 //
-// SWB_EXPLOSIVES.RPG7
-//
-@PointClass base(BaseProperties_kfgo) = swb_explosives_rpg7 : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
 // SWB_CSS.AK47
 //
 @PointClass base(BaseProperties_kfgo) = swb_css_ak47 : ""
@@ -34,109 +24,9 @@
 ]
 
 //
-// SWB_CSS.AK47Dual
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_ak47_dual : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.AWP
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_awp : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.Deagle
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_deagle : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.DeagleDual
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_deagle_dual : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.GrenadeHE
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_grenade_he : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.Knife
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_knife : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.M249
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_m249 : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.M249HE
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_m249_he : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.M4A1
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_m4a1 : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
 // SWB_CSS.MAC10
 //
 @PointClass base(BaseProperties_kfgo) = swb_css_mac10 : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
-//
-// SWB_CSS.Super90
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_super90 : ""
 [
 	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 
