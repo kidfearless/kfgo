@@ -37,7 +37,7 @@ namespace SWB_Base
 		// Helpful bezier function. Use this if you gotta: https://www.desmos.com/calculator/cahqdxeshd
 		public static float BezierY( float f, float a, float b, float c )
 		{
-			f = f * 3.2258f;
+			f *= 3.2258f;
 			return (MathF.Pow( 1.0f - f, 2.0f ) * a) + (2.0f * (1.0f - f) * f * b) + (MathF.Pow( f, 2.0f ) * c);
 		}
 

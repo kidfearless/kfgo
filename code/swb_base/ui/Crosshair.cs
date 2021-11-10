@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SWB_Base
 {
 
-	public class Crosshair : Panel
+	public class Crosshair:Panel
 	{
 
 		protected Panel CenterDot { get; set; }

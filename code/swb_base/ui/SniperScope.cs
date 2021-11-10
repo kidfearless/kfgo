@@ -5,7 +5,7 @@ using Sandbox.UI.Construct;
 namespace SWB_Base
 {
 
-	public class SniperScope : Panel
+	public class SniperScope:Panel
 	{
 		protected Panel LensWrapper { get; set; }
 		protected Panel ScopeWrapper { get; set; }

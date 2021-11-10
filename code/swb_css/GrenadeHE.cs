@@ -40,7 +40,7 @@ namespace SWB_CSS
 				Ammo = -1,
 				ClipSize = -1,
 				AmmoType = AmmoType.Grenade,
-				FiringType = FiringType.semi,
+				FiringType = FiringType.SemiAutomatic,
 				RPM = 50,
 			};
 			this.Secondary = this.Primary;

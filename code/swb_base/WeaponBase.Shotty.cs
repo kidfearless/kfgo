@@ -11,7 +11,8 @@ namespace SWB_Base
 		public virtual string ReloadFinishAnim => "reload_finished"; // Finishing reload animation
 		public virtual bool CanShootDuringReload => true; // Can the shotgun shoot while reloading
 
-		public override bool BulletCocking => false;
+		// TODO: Fix ME
+		//public override bool BulletCocking => false;
 
 		private void CancelReload()
 		{
@@ -42,7 +43,7 @@ namespace SWB_Base
 
 		public override void Reload()
 		{
-			this.Primary.ReloadTime = this.ShellReloadTimeStart;
+			this.Primary.Info.ReloadTime = this.ShellReloadTimeStart;
 			base.Reload();
 		}
 

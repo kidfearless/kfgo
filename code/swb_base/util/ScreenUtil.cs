@@ -18,18 +18,12 @@ namespace SWB_Base
 
 		public static void Shake( To to, ScreenShake screenShake )
 		{
-			if ( screenShake != null )
-			{
 				Shake( to, screenShake.Length, screenShake.Speed, screenShake.Size, screenShake.Rotation );
-			}
 		}
 
 		public static void Shake( ScreenShake screenShake )
 		{
-			if ( screenShake != null )
-			{
 				Shake( screenShake.Length, screenShake.Speed, screenShake.Size, screenShake.Rotation );
-			}
 		}
 
 		public static void ShakeAt( Vector3 origin, float radius = 0, float length = 0, float speed = 0, float size = 0, float rotation = 0 )
@@ -63,10 +57,7 @@ namespace SWB_Base
 
 		public static void ShakeAt( Vector3 position, float radius, ScreenShake screenShake )
 		{
-			if ( screenShake != null )
-			{
 				ShakeAt( position, radius, screenShake.Length, screenShake.Speed, screenShake.Size, screenShake.Rotation );
-			}
 		}
 
 		[ClientRpc]

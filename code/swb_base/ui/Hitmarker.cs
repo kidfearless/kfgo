@@ -1,11 +1,13 @@
-﻿using Sandbox.UI;
+﻿using KFGO.UI;
+
+using Sandbox.UI;
 
 using System.Threading.Tasks;
 
 namespace SWB_Base
 {
 
-	public class Hitmarker : Panel
+	public class Hitmarker:Panel
 	{
 		public static Hitmarker Current { get; set; }
 		protected Marker ActiveMarker { get; set; }
@@ -32,7 +34,7 @@ namespace SWB_Base
 			this.ActiveMarker = new Marker( this, isKill );
 		}
 
-		public class Marker : Panel
+		public class Marker:Panel
 		{
 			public Marker( Panel parent, bool isKill )
 			{

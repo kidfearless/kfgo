@@ -24,7 +24,7 @@ namespace SWB_Base
 				return false;
 			}
 
-			if ( clipInfo.FiringType == FiringType.semi && !Input.Pressed( inputButton ) )
+			if ( clipInfo.FiringType == FiringType.SemiAutomatic && !Input.Pressed( inputButton ) )
 			{
 				return false;
 			}

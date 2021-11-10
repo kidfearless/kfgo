@@ -1,4 +1,6 @@
-﻿using Sandbox;
+﻿using KFGO.UI;
+
+using Sandbox;
 using Sandbox.UI;
 
 /* 
@@ -10,7 +12,6 @@ namespace SWB_Base
 
 	public partial class WeaponBase
 	{
-		protected Panel HealthDisplay { get; set; }
 		protected Panel AmmoDisplay { get; set; }
 		protected Panel Hitmarker { get; set; }
 
@@ -23,7 +24,7 @@ namespace SWB_Base
 
 			if ( this.UISettings.ShowCrosshair )
 			{
-				this.CrosshairPanel = new Crosshair
+				this.CrosshairPanel = new Crosshair()
 				{
 					Parent = Local.Hud
 				};
@@ -31,15 +32,7 @@ namespace SWB_Base
 
 			if ( this.UISettings.ShowHitmarker )
 			{
-				this.Hitmarker = new Hitmarker
-				{
-					Parent = Local.Hud
-				};
-			}
-
-			if ( this.UISettings.ShowHealthCount || this.UISettings.ShowHealthIcon )
-			{
-				this.HealthDisplay = new HealthDisplay( this.UISettings )
+				this.Hitmarker = new Hitmarker()
 				{
 					Parent = Local.Hud
 				};
@@ -58,20 +51,8 @@ namespace SWB_Base
 		{
 			base.DestroyHudElements();
 
-			if ( this.HealthDisplay != null )
-			{
-				this.HealthDisplay.Delete( true );
-			}
-
-			if ( this.AmmoDisplay != null )
-			{
-				this.AmmoDisplay.Delete( true );
-			}
-
-			if ( this.Hitmarker != null )
-			{
-				this.Hitmarker.Delete( true );
-			}
+			this.AmmoDisplay?.Delete( true );
+			this.Hitmarker?.Delete( true );
 		}
 	}
 }

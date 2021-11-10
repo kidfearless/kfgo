@@ -34,7 +34,7 @@ namespace SWB_CSS
 				Spread = 0.3f,
 				Recoil = 2f,
 				RPM = 80,
-				FiringType = FiringType.semi,
+				FiringType = FiringType.SemiAutomatic,
 				ScreenShake = new ScreenShake
 				{
 					Length = 0.5f,

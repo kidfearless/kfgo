@@ -1,9 +1,11 @@
 ﻿
 using Sandbox;
 
+using SWB_CSS;
+
 namespace KFGO
 {
-	partial class KFPlayer : SWB_Base.PlayerBase
+	public partial class KFPlayer : SWB_Base.PlayerBase
 	{
 		public float Armor { get; set; }
 
@@ -25,22 +27,26 @@ namespace KFGO
 			Log.Info( "Init" );
 		}
 
+		public override void SetDefaultController() => this.Controller = new Controller();
+
 		public override void Spawn()
 		{
 			Log.Info( "Spawn" );
 			base.Spawn();
 		}
 
-		public override void SetDefaultController() => this.Controller = new Controller();
 		public override void Respawn()
 		{
 			Log.Info( "Respawn" );
+			Log.Info( IsServer );
 			base.Respawn();
 
 			this.Armor = 0;
 
-			this.Inventory.Add( new SWB_CSS.Knife(), true );
-			this.Inventory.Add( new SWB_CSS.AK47() );
+			//this.Inventory.Add( new SWB_CSS.Knife(), true );
+
+			this.Inventory.Add(MAC10.Create(), true);
+			// this.Inventory.Add( KFGame.Current.WeaponData.CreateWeaponByName<AK47>(nameof(AK47)), true );
 		}
 
 

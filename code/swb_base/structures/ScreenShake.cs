@@ -1,10 +1,10 @@
 ﻿namespace SWB_Base
 {
-	public class ScreenShake
+	public struct ScreenShake
 	{
-		public float Length { get; set; } = 0f;
-		public float Speed { get; set; } = 0f;
-		public float Size { get; set; } = 0f;
-		public float Rotation { get; set; } = 0f;
+		public float Length { get; set; }
+		public float Speed { get; set; }
+		public float Size { get; set; }
+		public float Rotation { get; set; }
 	}
 }

@@ -6,7 +6,7 @@ using SWB_Base;
 
 using System;
 
-public class AmmoDisplay : Panel
+public class AmmoDisplay:Panel
 {
 	Panel _AmmoWrapper;
 	Panel _IconWrapper;
@@ -105,7 +105,7 @@ public class AmmoDisplay : Panel
 
 		if ( this._FireModeWrapper != null )
 		{
-			bool isSemiFire = weapon.Primary.FiringType == FiringType.semi;
+			bool isSemiFire = weapon.Primary.FiringType == FiringType.SemiAutomatic;
 
 			this._SemiFireIcon.Style.Opacity = isSemiFire ? 1 : 0.25f;
 			this._AutoFireIcon.Style.Opacity = isSemiFire ? 0.25f : 1;

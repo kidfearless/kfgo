@@ -15,7 +15,7 @@ using Sandbox.UI.Construct;
 namespace SWB_Base
 {
 
-	public class SniperScopeRT : Panel
+	public class SniperScopeRT:Panel
 	{
 		protected Image ScopeRT { get; set; }
 		protected Texture RTTexture { get; set; }

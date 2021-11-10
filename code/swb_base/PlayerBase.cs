@@ -72,6 +72,8 @@ namespace SWB_Base
 
 			base.Simulate( cl );
 
+
+
 			// Input requested a weapon switch
 			if ( Input.ActiveChild != null )
 			{
@@ -120,7 +122,7 @@ namespace SWB_Base
 			//
 			if ( this.ActiveChild is WeaponBase weapon && !weapon.IsUsable() && weapon.TimeSincePrimaryAttack > 0.5f && weapon.TimeSinceSecondaryAttack > 0.5f )
 			{
-				this.SwitchToBestWeapon();
+				//this.SwitchToBestWeapon();
 			}
 		}
 
@@ -216,8 +218,8 @@ namespace SWB_Base
 		public void TookDamage( Vector3 pos )
 		{
 			//DebugOverlay.Sphere( pos, 5.0f, Color.Red, false, 50.0f );
-
-			DamageIndicator.Current?.OnHit( pos );
+			// TODO: REIMPLIMENT
+			//DamageIndicator.Current?.OnHit( pos );
 		}
 
 		[ClientRpc]

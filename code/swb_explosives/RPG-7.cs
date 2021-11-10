@@ -48,7 +48,7 @@ namespace SWB_EXPLOSIVES
 				Spread = 0.2f,
 				Recoil = 0.7f,
 				RPM = 800,
-				FiringType = FiringType.semi,
+				FiringType = FiringType.SemiAutomatic,
 				ScreenShake = new ScreenShake
 				{
 					Length = 0.5f,

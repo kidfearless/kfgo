@@ -30,7 +30,6 @@ partial class InventoryBase : BaseInventory
 				if ( showNotice )
 				{
 					Sound.FromWorld( "dm.pickup_ammo", ent.Position );
-					PickupFeed.OnPickup( To.Single( player ), $"+{ammo} {ammoType}" );
 				}
 			}
 
@@ -49,7 +48,7 @@ partial class InventoryBase : BaseInventory
 
 	public virtual bool IsCarryingType<T>()
 	{
-		return this.List.Any( x => x.GetType() == typeof( T ) );
+		return this.List.Any( x => x is T );
 	}
 
 	public virtual bool IsCarryingType( Type type )
@@ -65,10 +64,6 @@ partial class InventoryBase : BaseInventory
 		}
 
 		Entity ent = this.Owner.ActiveChild;
-		if ( ent == null )
-		{
-			return null;
-		}
 
 		if ( ent is WeaponBase weapon && weapon.CanDrop && this.Drop( ent ) )
 		{
