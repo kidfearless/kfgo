@@ -7,13 +7,6 @@
 //	[Library( "swb_css_knife", Title = "Knife" )]
 //	public class Knife : WeaponBaseMelee
 //	{
-//		public override int Bucket => 0;
-//		public override HoldType HoldType => HoldType.Pistol;
-//		public override string ViewModelPath => "weapons/swb/css/knife/css_v_knife.vmdl";
-//		public override string WorldModelPath => "weapons/swb/css/knife/css_w_knife.vmdl";
-//		public override string Icon => "/swb_css/textures/ui/css_icon_knife.png";
-//		public override int FOV => 75;
-
 //		public override string SwingAnimationHit => "swing";
 //		public override string SwingAnimationMiss => "swing_miss";
 //		public override string StabAnimationHit => "stab";
@@ -33,6 +26,13 @@
 
 //		public Knife()
 //		{
+//			Bucket = 0;
+//			HoldType = HoldType.Pistol;
+//			ViewModel = "weapons/swb/css/knife/css_v_knife.vmdl";
+//			WorldModelPath = "weapons/swb/css/knife/css_w_knife.vmdl";
+//			Icon = "/swb_css/textures/ui/css_icon_knife.png";
+//			FOV = 75;
+
 //			this.UISettings = new UISettings
 //			{
 //				ShowCrosshairLines = false,

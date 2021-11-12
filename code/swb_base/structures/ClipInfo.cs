@@ -23,35 +23,9 @@ namespace SWB_Base
 
 		}
 
-		public ClipInfo( IClipInfo clip )
+		public ClipInfo( Clip clip )
 		{
-			this.Ammo = clip.Ammo;
-			this.AmmoType = clip.AmmoType;
-			this.ClipSize = clip.ClipSize;
-			this.ReloadTime = clip.ReloadTime;
-			this.ReloadEmptyTime = clip.ReloadEmptyTime;
-			this.Bullets = clip.Bullets;
-			this.BulletSize = clip.BulletSize;
-			this.Damage = clip.Damage;
-			this.Force = clip.Force;
-			this.Spread = clip.Spread;
-			this.Recoil = clip.Recoil;
-			this.RPM = clip.RPM;
-			this.FiringType = clip.FiringType;
-			this.ScreenShake = clip.ScreenShake;
-			this.ShootAnim = clip.ShootAnim;
-			this.ReloadAnim = clip.ReloadAnim;
-			this.ReloadEmptyAnim = clip.ReloadEmptyAnim;
-			this.DrawAnim = clip.DrawAnim;
-			this.DrawEmptyAnim = clip.DrawEmptyAnim;
-			this.DryFireSound = clip.DryFireSound;
-			this.ShootSound = clip.ShootSound;
-			this.BulletEjectParticle = clip.BulletEjectParticle;
-			this.MuzzleFlashParticle = clip.MuzzleFlashParticle;
-			this.BarrelSmokeParticle = clip.BarrelSmokeParticle;
-			this.BulletTracerParticle = clip.BulletTracerParticle;
-			this.InfiniteAmmo = clip.InfiniteAmmo;
-
+			
 		}
 
 		[Net]

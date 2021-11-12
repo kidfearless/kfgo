@@ -25,10 +25,12 @@ namespace SWB_Base
 		public virtual int ZoomFOV { get; set; } = 65; // FOV while zooming
 		public virtual float TuckRange { get; set; } = 30; // Range that tucking should be enabled (set to -1 to disable tucking)
 		public virtual HoldType HoldType { get; set; } = HoldType.Pistol; // Thirdperson holdtype
-		private string _ViewModelPath = "weapons/rust_pistol/v_rust_pistol.vmdl";
-		[Obsolete("ViewModelPath has not set available setter, use ViewModel instead")]
-		public override string ViewModelPath { get => _ViewModelPath; } // Path to the view model
-		public virtual string ViewModel { get => _ViewModelPath; set => _ViewModelPath = value; }
+
+		private string view;
+		public string ViewModel { get => view; set => view = value; }
+		public override string ViewModelPath => view;
+
+
 		public virtual string WorldModelPath { get; set; } = "weapons/rust_pistol/rust_pistol.vmdl"; // Path to the world model
 		public virtual string Icon { get; set; } = ""; // Path to an image that represent the weapon on the HUD
 		public virtual float WalkAnimationSpeedMod { get; set; } = 1; // Procedural animation speed ( lower is slower )

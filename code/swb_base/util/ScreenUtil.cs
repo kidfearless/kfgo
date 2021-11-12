@@ -16,8 +16,9 @@ namespace SWB_Base
 			ShakeRPC( to, length, speed, size, rotation );
 		}
 
-		public static void Shake( To to, ScreenShake screenShake )
+		public static void Shake( To to, ClipInfo clip )
 		{
+			ref var screenShake = ref clip.GetScreenShake();
 				Shake( to, screenShake.Length, screenShake.Speed, screenShake.Size, screenShake.Rotation );
 		}
 

@@ -10,6 +10,7 @@
 	"Clips": [
 		{
 			"Name": "AK47_Primary_Clip",
+			"Inherits": "WeaponBase_Primary_Clip",
 			"Ammo": 30,
 			"AmmoType": "Rifle",
 			"ClipSize": 30,
@@ -32,15 +33,41 @@
 			"BulletEjectParticle": "particles/pistol_ejectbrass.vpcf",
 			"MuzzleFlashParticle": "particles/swb/muzzle/flash_medium.vpcf",
 			"InfiniteAmmo": "Reserve"
+		},
+		{
+			"Name": "WeaponBase_Primary_Clip",
+			"Inherits": null,
+			"Ammo": 10,
+			"AmmoType": "Pistol",
+			"ClipSize": 10,
+			"ReloadTime": 1,
+			"ReloadEmptyTime": -1,
+			"Bullets": 1,
+			"BulletSize": 0.1,
+			"Damage": 5,
+			"Force": 0.1,
+			"Spread": 0.1,
+			"Recoil": 0.1,
+			"RPM": 200,
+			"FiringType": "SemiAutomatic",
+			"ShootAnim": "fire",
+			"ReloadAnim": "reload",
+			"ReloadEmptyAnim": "reload_empty",
+			"DrawAnim": "deploy",
+			"DrawEmptyAnim": "",
+			"BarrelSmokeParticle": "particles/swb/muzzle/barrel_smoke.vpcf",
+			"BulletTracerParticle": "particles/swb/tracer/tracer_medium.vpcf",
+			"InfiniteAmmo": "Normal"
 		}
 	],
 	"WeaponAttributes": [
 		{
 			"Name": "AK47_Attributes",
+			"Inherits": "WeaponBase_Attributes",
 			"Bucket": 3,
 			"HoldType": "Rifle",
-			"ViewModelPath": "weapons/swb/css/ak47/css_v_rif_ak47.vmdl",
-			"WorldModelPath": "weapons/swb/css/ak47/css_w_rif_ak47.vmdl",
+			"ViewModel": "weapons/swb/css/ak47/css_v_rif_ak47.vmdl",
+			"WorldModelPath": "weapons/swb/css/ak47/css_w_rk47.vmdl",
 			"Icon": "/swb_css/textures/ui/css_icon_ak47.png",
 			"FOV": 75,
 			"ZoomFOV": 35,
@@ -53,6 +80,31 @@
 				"Angle": "10, 40, 0",
 				"Pos": "5, 0, 0"
 			}
+		},
+		{
+			"Name": "WeaponBase_Attributes",
+			"Inherits": null,
+			"Bucket": 1,
+			"BucketWeight": 100,
+			"HoldType": "Pistol",
+			"ViewModel": "weapons/rust_pistol/v_rust_pistol.vmdl",
+			"WorldModelPath": "weapons/rust_pistol/rust_pistol.vmdl",
+			"Icon": "",
+			"FOV": 65,
+			"ZoomFOV": 65,
+			"WalkAnimationSpeedMod": 1,
+			"ZoomAnimData": {},
+			"RunAnimData": {},
+			"CanDrop": true,
+			"DropWeaponOnDeath": true,
+			"BulletCocking": true,
+			"BarrelSmoking": true,
+			"FreezeViewModelOnZoom": null,
+			"TuckRange": 30,
+			"AimSensitivity": 0.85,
+			"DualWield": false,
+			"PrimaryDelay": -1,
+			"SecondaryDelay": -1
 		}
 	]
 }

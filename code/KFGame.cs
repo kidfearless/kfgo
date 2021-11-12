@@ -2,9 +2,12 @@
 using Sandbox;
 
 using System;
+using System.Diagnostics;
 
 namespace KFGO
 {
+
+
 	public delegate void HotReload( DateTime dateTime );
 
 	public partial class KFGame : Sandbox.Game
@@ -14,7 +17,7 @@ namespace KFGO
 
 		public static new KFGame Current => _Instance;
 		public static event HotReload HotReload;
-		public WeaponDataParser WeaponData { get; private set; }
+		public WeaponData WeaponData { get; private set; }
 
 
 
@@ -57,38 +60,20 @@ namespace KFGO
 		{
 			_Instance = this;
 			Global.TickRate = 128;
-			KFGame.HotReload += this.KFGame_HotReload;
-			this.InitializeGame();
-		}
-
-		private void KFGame_HotReload( DateTime dateTime )
-		{
-			InitializeGame();
-			if ( !this.IsServer )
-			{
-				return;
-			}
-
-			foreach ( Client client in Client.All )
-			{
-
-				this.ClientJoined( client );
-			}
+			//KFGame.HotReload += this.KFGame_HotReload;
+			this.InitializeGame();		
 		}
 
 		protected virtual void InitializeGame()
 		{
+			WeaponData.Parse();
+
 			if ( this.IsServer )
 			{
-				Log.Info( "My Gamemode Has Created Serverside!" );
-				_ = new KFHud();
-				this.WeaponData = new WeaponDataParser();
-				this.WeaponData.Parse();
-			}
-
-			if ( this.IsClient )
-			{
-				Log.Info( "My Gamemode Has Created Clientside!" );
+				if ( Local.Hud == null )
+				{
+					_ = new KFHud();
+				}
 			}
 		}
 

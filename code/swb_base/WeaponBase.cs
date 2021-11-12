@@ -1,4 +1,10 @@
-﻿using Sandbox;
+﻿using KFGO;
+
+using Sandbox;
+
+using System;
+using System.Linq;
+using System.Text;
 
 /* 
  * Weapon base for weapons using magazine based reloading 
@@ -9,6 +15,75 @@ namespace SWB_Base
 
 	public partial class WeaponBase : CarriableBase
 	{
+		public bool HasSpawned { get; set; }
+
+		// this is forcefully called no matter what
+		public WeaponBase()	{	}
+
+
+		public WeaponBase( string name ) : base()
+		{
+			var data = WeaponData.GetByName( name );
+
+			this.Primary = new();
+			if(data.Primary.Ammo != null) this.Primary.Ammo = data.Primary.Ammo.Value;
+			if(data.Primary.AmmoType != null) this.Primary.AmmoType = data.Primary.AmmoType.Value;
+			if(data.Primary.ClipSize != null) this.Primary.ClipSize = data.Primary.ClipSize.Value;
+			if(data.Primary.ReloadTime != null) this.Primary.ReloadTime = data.Primary.ReloadTime.Value;
+			if(data.Primary.ReloadEmptyTime != null) this.Primary.ReloadEmptyTime = data.Primary.ReloadEmptyTime.Value;
+			if(data.Primary.Bullets != null) this.Primary.Bullets = data.Primary.Bullets.Value;
+			if(data.Primary.BulletSize != null) this.Primary.BulletSize = data.Primary.BulletSize.Value;
+			if(data.Primary.Damage != null) this.Primary.Damage = data.Primary.Damage.Value;
+			if(data.Primary.Force != null) this.Primary.Force = data.Primary.Force.Value;
+			if(data.Primary.Spread != null) this.Primary.Spread = data.Primary.Spread.Value;
+			if(data.Primary.Recoil != null) this.Primary.Recoil = data.Primary.Recoil.Value;
+			if(data.Primary.RPM != null) this.Primary.RPM = data.Primary.RPM.Value;
+			if(data.Primary.FiringType != null) this.Primary.FiringType = data.Primary.FiringType.Value;
+			if(data.Primary.ScreenShake != null) this.Primary.ScreenShake = data.Primary.ScreenShake.Value;
+			if(data.Primary.ShootAnim != null) this.Primary.ShootAnim = data.Primary.ShootAnim;
+			if(data.Primary.ReloadAnim != null) this.Primary.ReloadAnim = data.Primary.ReloadAnim;
+			if(data.Primary.ReloadEmptyAnim != null) this.Primary.ReloadEmptyAnim = data.Primary.ReloadEmptyAnim;
+			if(data.Primary.DrawAnim != null) this.Primary.DrawAnim = data.Primary.DrawAnim;
+			if(data.Primary.DrawEmptyAnim != null) this.Primary.DrawEmptyAnim = data.Primary.DrawEmptyAnim;
+			if(data.Primary.DryFireSound != null) this.Primary.DryFireSound = data.Primary.DryFireSound;
+			if(data.Primary.ShootSound != null) this.Primary.ShootSound = data.Primary.ShootSound;
+			if(data.Primary.BulletEjectParticle != null) this.Primary.BulletEjectParticle = data.Primary.BulletEjectParticle;
+			if(data.Primary.MuzzleFlashParticle != null) this.Primary.MuzzleFlashParticle = data.Primary.MuzzleFlashParticle;
+			if(data.Primary.BarrelSmokeParticle != null) this.Primary.BarrelSmokeParticle = data.Primary.BarrelSmokeParticle;
+			if(data.Primary.BulletTracerParticle != null) this.Primary.BulletTracerParticle = data.Primary.BulletTracerParticle;
+			if(data.Primary.InfiniteAmmo != null) this.Primary.InfiniteAmmo = data.Primary.InfiniteAmmo.Value;
+
+			if ( data.Secondary != null )
+			{
+				//this.Secondary = new( data.Secondary );
+			}
+
+			// gross
+			if ( data.Attributes.Bucket != null ) this.Bucket = data.Attributes.Bucket.Value;
+			if ( data.Attributes.BucketWeight != null ) this.BucketWeight = data.Attributes.BucketWeight.Value;
+			if ( data.Attributes.CanDrop != null ) this.CanDrop = data.Attributes.CanDrop.Value;
+			if ( data.Attributes.DropWeaponOnDeath != null ) this.DropWeaponOnDeath = data.Attributes.DropWeaponOnDeath.Value;
+			if ( data.Attributes.BulletCocking != null ) this.BulletCocking = data.Attributes.BulletCocking.Value;
+			if ( data.Attributes.BarrelSmoking != null ) this.BarrelSmoking = data.Attributes.BarrelSmoking.Value;
+			if ( data.Attributes.FreezeViewModelOnZoom != null ) this.FreezeViewModelOnZoom = data.Attributes.FreezeViewModelOnZoom;
+			if ( data.Attributes.FOV != null ) this.FOV = data.Attributes.FOV.Value;
+			if ( data.Attributes.ZoomFOV != null ) this.ZoomFOV = data.Attributes.ZoomFOV.Value;
+			if ( data.Attributes.TuckRange != null ) this.TuckRange = data.Attributes.TuckRange.Value;
+			if ( data.Attributes.HoldType != null ) this.HoldType = data.Attributes.HoldType.Value;
+			if ( data.Attributes.ViewModel != null ) this.ViewModel = data.Attributes.ViewModel;
+			if ( data.Attributes.WorldModelPath != null ) this.WorldModelPath = data.Attributes.WorldModelPath;
+			if ( data.Attributes.Icon != null ) this.Icon = data.Attributes.Icon;
+			if ( data.Attributes.WalkAnimationSpeedMod != null ) this.WalkAnimationSpeedMod = data.Attributes.WalkAnimationSpeedMod.Value;
+			if ( data.Attributes.AimSensitivity != null ) this.AimSensitivity = data.Attributes.AimSensitivity.Value;
+			if ( data.Attributes.DualWield != null ) this.DualWield = data.Attributes.DualWield.Value;
+			if ( data.Attributes.PrimaryDelay != null ) this.PrimaryDelay = data.Attributes.PrimaryDelay.Value;
+			if ( data.Attributes.SecondaryDelay != null ) this.SecondaryDelay = data.Attributes.SecondaryDelay.Value;
+			if ( data.Attributes.ZoomAnimData != null ) this.ZoomAnimData = data.Attributes.ZoomAnimData;
+			if ( data.Attributes.RunAnimData != null ) this.RunAnimData = data.Attributes.RunAnimData;
+
+		}
+
+
 		public override void Spawn()
 		{
 			base.Spawn();

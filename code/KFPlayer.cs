@@ -1,6 +1,8 @@
 ﻿
 using Sandbox;
 
+using SWB_Base;
+
 using SWB_CSS;
 
 namespace KFGO
@@ -37,25 +39,21 @@ namespace KFGO
 
 		public override void Respawn()
 		{
-			Log.Info( "Respawn" );
-			Log.Info( IsServer );
-			base.Respawn();
+			KLog.Info( "Respawn" );
 
 			this.Armor = 0;
 
 			//this.Inventory.Add( new SWB_CSS.Knife(), true );
 
 			//this.Inventory.Add(MAC10.Create(), true);
-			this.Inventory.Add( KFGame.Current.WeaponData.CreateWeaponByName<AK47>(nameof(AK47)), true );
-		}
 
+			if(IsClient)
+			{
+				KLog.Info( "IsClient" );
+			}
+			this.Inventory.Add( new AK47(), true );
+			base.Respawn();
 
-		/// <summary>
-		/// Called every tick, clientside and serverside.
-		/// </summary>
-		public override void Simulate( Client cl )
-		{
-			base.Simulate( cl );
 		}
 	}
 }

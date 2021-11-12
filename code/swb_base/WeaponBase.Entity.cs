@@ -73,7 +73,7 @@ namespace SWB_Base
 			(this.Owner as AnimEntity).SetAnimBool( "b_attack", true );
 
 			// Weapon anim
-			ScreenUtil.Shake( To.Single( this.Owner ), clipInfo.ScreenShake );
+			ScreenUtil.Shake( To.Single( this.Owner ), clipInfo );
 			this.ShootEffects( clipInfo.MuzzleFlashParticle, clipInfo.BulletEjectParticle, clipInfo.ShootAnim );
 
 			if ( !string.IsNullOrEmpty( clipInfo.ShootSound ) )
@@ -125,7 +125,7 @@ namespace SWB_Base
 			this.TakeAmmo( 1 );
 
 			// Play shoot effects
-			ScreenUtil.Shake( To.Single( owner ), clipInfo.ScreenShake );
+			ScreenUtil.Shake( To.Single( owner ), clipInfo );
 			this.ShootEffects( clipInfo.MuzzleFlashParticle, clipInfo.BulletEjectParticle, null );
 
 			if ( clipInfo.ShootSound != null )

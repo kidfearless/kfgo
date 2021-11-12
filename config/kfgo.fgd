@@ -23,13 +23,3 @@
 	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
 ]
 
-//
-// SWB_CSS.MAC10
-//
-@PointClass base(BaseProperties_kfgo) = swb_css_mac10 : ""
-[
-	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
-
-	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
-]
-
