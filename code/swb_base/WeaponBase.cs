@@ -13,12 +13,40 @@ using System.Text;
 namespace SWB_Base
 {
 
+	public partial class Weapon : WeaponBase
+	{
+		public Weapon()
+		{
+
+		}
+		public Weapon( string weaponname ) : base( weaponname ) { }
+
+		public static Weapon CreateWeapon(string name)
+		{
+			Weapon weapon = new Weapon( name );
+			return weapon;
+		}
+	}
+
+	public partial class WeaponBase
+	{
+		public void OnWorldModelPathChanged( string oldvalue, string newvalue )
+		{
+
+		}
+
+		public void OnViewModelChanged(string oldvalue, string newvalue)
+		{
+			ViewModel = newvalue;
+			ActiveEnd( Local.Pawn, false );
+			ActiveStart( Local.Pawn );
+		}
+	}
+
 	public partial class WeaponBase : CarriableBase
 	{
-		public bool HasSpawned { get; set; }
-
-		// this is forcefully called no matter what
-		public WeaponBase()	{	}
+		// this is forcefully called no matter what on the client!!!
+		public WeaponBase() { }
 
 
 		public WeaponBase( string name ) : base()
@@ -26,32 +54,32 @@ namespace SWB_Base
 			var data = WeaponData.GetByName( name );
 
 			this.Primary = new();
-			if(data.Primary.Ammo != null) this.Primary.Ammo = data.Primary.Ammo.Value;
-			if(data.Primary.AmmoType != null) this.Primary.AmmoType = data.Primary.AmmoType.Value;
-			if(data.Primary.ClipSize != null) this.Primary.ClipSize = data.Primary.ClipSize.Value;
-			if(data.Primary.ReloadTime != null) this.Primary.ReloadTime = data.Primary.ReloadTime.Value;
-			if(data.Primary.ReloadEmptyTime != null) this.Primary.ReloadEmptyTime = data.Primary.ReloadEmptyTime.Value;
-			if(data.Primary.Bullets != null) this.Primary.Bullets = data.Primary.Bullets.Value;
-			if(data.Primary.BulletSize != null) this.Primary.BulletSize = data.Primary.BulletSize.Value;
-			if(data.Primary.Damage != null) this.Primary.Damage = data.Primary.Damage.Value;
-			if(data.Primary.Force != null) this.Primary.Force = data.Primary.Force.Value;
-			if(data.Primary.Spread != null) this.Primary.Spread = data.Primary.Spread.Value;
-			if(data.Primary.Recoil != null) this.Primary.Recoil = data.Primary.Recoil.Value;
-			if(data.Primary.RPM != null) this.Primary.RPM = data.Primary.RPM.Value;
-			if(data.Primary.FiringType != null) this.Primary.FiringType = data.Primary.FiringType.Value;
-			if(data.Primary.ScreenShake != null) this.Primary.ScreenShake = data.Primary.ScreenShake.Value;
-			if(data.Primary.ShootAnim != null) this.Primary.ShootAnim = data.Primary.ShootAnim;
-			if(data.Primary.ReloadAnim != null) this.Primary.ReloadAnim = data.Primary.ReloadAnim;
-			if(data.Primary.ReloadEmptyAnim != null) this.Primary.ReloadEmptyAnim = data.Primary.ReloadEmptyAnim;
-			if(data.Primary.DrawAnim != null) this.Primary.DrawAnim = data.Primary.DrawAnim;
-			if(data.Primary.DrawEmptyAnim != null) this.Primary.DrawEmptyAnim = data.Primary.DrawEmptyAnim;
-			if(data.Primary.DryFireSound != null) this.Primary.DryFireSound = data.Primary.DryFireSound;
-			if(data.Primary.ShootSound != null) this.Primary.ShootSound = data.Primary.ShootSound;
-			if(data.Primary.BulletEjectParticle != null) this.Primary.BulletEjectParticle = data.Primary.BulletEjectParticle;
-			if(data.Primary.MuzzleFlashParticle != null) this.Primary.MuzzleFlashParticle = data.Primary.MuzzleFlashParticle;
-			if(data.Primary.BarrelSmokeParticle != null) this.Primary.BarrelSmokeParticle = data.Primary.BarrelSmokeParticle;
-			if(data.Primary.BulletTracerParticle != null) this.Primary.BulletTracerParticle = data.Primary.BulletTracerParticle;
-			if(data.Primary.InfiniteAmmo != null) this.Primary.InfiniteAmmo = data.Primary.InfiniteAmmo.Value;
+			if ( data.Primary.Ammo != null ) this.Primary.Ammo = data.Primary.Ammo.Value;
+			if ( data.Primary.AmmoType != null ) this.Primary.AmmoType = data.Primary.AmmoType.Value;
+			if ( data.Primary.ClipSize != null ) this.Primary.ClipSize = data.Primary.ClipSize.Value;
+			if ( data.Primary.ReloadTime != null ) this.Primary.ReloadTime = data.Primary.ReloadTime.Value;
+			if ( data.Primary.ReloadEmptyTime != null ) this.Primary.ReloadEmptyTime = data.Primary.ReloadEmptyTime.Value;
+			if ( data.Primary.Bullets != null ) this.Primary.Bullets = data.Primary.Bullets.Value;
+			if ( data.Primary.BulletSize != null ) this.Primary.BulletSize = data.Primary.BulletSize.Value;
+			if ( data.Primary.Damage != null ) this.Primary.Damage = data.Primary.Damage.Value;
+			if ( data.Primary.Force != null ) this.Primary.Force = data.Primary.Force.Value;
+			if ( data.Primary.Spread != null ) this.Primary.Spread = data.Primary.Spread.Value;
+			if ( data.Primary.Recoil != null ) this.Primary.Recoil = data.Primary.Recoil.Value;
+			if ( data.Primary.RPM != null ) this.Primary.RPM = data.Primary.RPM.Value;
+			if ( data.Primary.FiringType != null ) this.Primary.FiringType = data.Primary.FiringType.Value;
+			if ( data.Primary.ScreenShake != null ) this.Primary.ScreenShake = data.Primary.ScreenShake.Value;
+			if ( data.Primary.ShootAnim != null ) this.Primary.ShootAnim = data.Primary.ShootAnim;
+			if ( data.Primary.ReloadAnim != null ) this.Primary.ReloadAnim = data.Primary.ReloadAnim;
+			if ( data.Primary.ReloadEmptyAnim != null ) this.Primary.ReloadEmptyAnim = data.Primary.ReloadEmptyAnim;
+			if ( data.Primary.DrawAnim != null ) this.Primary.DrawAnim = data.Primary.DrawAnim;
+			if ( data.Primary.DrawEmptyAnim != null ) this.Primary.DrawEmptyAnim = data.Primary.DrawEmptyAnim;
+			if ( data.Primary.DryFireSound != null ) this.Primary.DryFireSound = data.Primary.DryFireSound;
+			if ( data.Primary.ShootSound != null ) this.Primary.ShootSound = data.Primary.ShootSound;
+			if ( data.Primary.BulletEjectParticle != null ) this.Primary.BulletEjectParticle = data.Primary.BulletEjectParticle;
+			if ( data.Primary.MuzzleFlashParticle != null ) this.Primary.MuzzleFlashParticle = data.Primary.MuzzleFlashParticle;
+			if ( data.Primary.BarrelSmokeParticle != null ) this.Primary.BarrelSmokeParticle = data.Primary.BarrelSmokeParticle;
+			if ( data.Primary.BulletTracerParticle != null ) this.Primary.BulletTracerParticle = data.Primary.BulletTracerParticle;
+			if ( data.Primary.InfiniteAmmo != null ) this.Primary.InfiniteAmmo = data.Primary.InfiniteAmmo.Value;
 
 			if ( data.Secondary != null )
 			{
@@ -140,7 +168,7 @@ namespace SWB_Base
 					this.IsDualWieldConverted = true;
 					this.Primary.Ammo *= 2;
 					this.Primary.ClipSize *= 2;
-					this.Primary.RPM = (int)(this.Primary.RPM * 1.25);
+					this.Primary.RPM = (int)(this.Primary.RPM * 2.0);
 					this.ZoomAnimData = null;
 					this.RunAnimData = null;
 				}
@@ -344,6 +372,11 @@ namespace SWB_Base
 			}
 		}
 
+		[ClientRpc]
+		public void CreateView()
+		{
+			this.CreateViewModel();
+		}
 		public override void CreateViewModel()
 		{
 			Host.AssertClient();
@@ -352,6 +385,8 @@ namespace SWB_Base
 			{
 				return;
 			}
+
+			this.ViewModelEntity?.Delete();
 
 			this.ViewModelEntity = new ViewModelBase( this )
 			{

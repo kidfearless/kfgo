@@ -21,11 +21,6 @@ namespace SWB_Base
 		protected float LerpZoomAmount { get; set; } = 0;
 		protected float OldSpread { get; set; } = -1;
 
-		public override void ActiveStart( Entity ent )
-		{
-			base.ActiveStart( ent );
-		}
-
 		public override void ActiveEnd( Entity ent, bool dropped )
 		{
 			base.ActiveEnd( ent, dropped );

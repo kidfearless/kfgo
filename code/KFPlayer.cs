@@ -47,13 +47,13 @@ namespace KFGO
 
 			//this.Inventory.Add(MAC10.Create(), true);
 
-			if(IsClient)
+			if ( IsClient )
 			{
 				KLog.Info( "IsClient" );
 			}
-			this.Inventory.Add( new AK47(), true );
-			base.Respawn();
 
+			this.Inventory.Add( Weapon.CreateWeapon(nameof(MAC10)), true );
+			base.Respawn();
 		}
 	}
 }

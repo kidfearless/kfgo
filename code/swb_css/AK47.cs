@@ -8,5 +8,6 @@ namespace SWB_CSS
 	public class AK47 : WeaponBase
 	{
 		public AK47() : base( nameof( AK47 ) ) { }
+		public AK47(string val) : base( val ) { }
 	}
 }

@@ -189,15 +189,15 @@ namespace SWB_Base
 			if ( info.Attacker is PlayerBase attacker && attacker != this )
 			{
 				// Note - sending this only to the attacker!
-				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, this.Health, ((float)this.Health).LerpInverse( 100, 0 ) );
+				//attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, this.Health, ((float)this.Health).LerpInverse( 100, 0 ) );
 
 				// Hitmarker
 				if ( info.Weapon is WeaponBase weapon && weapon.UISettings.ShowHitmarker )
 				{
-					attacker.ShowHitmarker( To.Single( attacker ), !this.Alive(), weapon.UISettings.PlayHitmarkerSound );
+					//attacker.ShowHitmarker( To.Single( attacker ), !this.Alive(), weapon.UISettings.PlayHitmarkerSound );
 				}
 
-				this.TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
+				//this.TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
 			}
 		}
 

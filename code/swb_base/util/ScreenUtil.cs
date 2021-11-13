@@ -13,7 +13,7 @@ namespace SWB_Base
 
 		public static void Shake( To to, float length = 0, float speed = 0, float size = 0, float rotation = 0 )
 		{
-			ShakeRPC( to, length, speed, size, rotation );
+			//ShakeRPC( to, length, speed, size, rotation );
 		}
 
 		public static void Shake( To to, ClipInfo clip )
@@ -52,7 +52,7 @@ namespace SWB_Base
 				rotation *= distanceMul;
 				size *= distanceMul;
 
-				ShakeRPC( To.Single( ply ), length, speed, size, rotation );
+				//ShakeRPC( To.Single( ply ), length, speed, size, rotation );
 			}
 		}
 

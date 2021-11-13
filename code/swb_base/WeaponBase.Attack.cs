@@ -284,7 +284,7 @@ namespace SWB_Base
 		[ClientRpc]
 		protected virtual void ShootEffects( string muzzleFlashParticle, string bulletEjectParticle, string shootAnim )
 		{
-			Host.AssertClient();
+			if ( !Host.IsClient ) return;
 
 			BaseViewModel animatingViewModel = this.DualWield && this.DualWieldLeftFire ? this.DualWieldViewModel : this.ViewModelEntity;
 			ModelEntity firingViewModel = animatingViewModel;

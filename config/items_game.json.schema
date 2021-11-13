@@ -1,0 +1,306 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$ref": "#/definitions/GameItems",
+	"definitions": {
+		"GameItems": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"BaseWeapons": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/BaseWeapon"
+					}
+				},
+				"Clips": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Clip"
+					}
+				},
+				"WeaponAttributes": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WeaponAttribute"
+					}
+				}
+			},
+			"required": [
+				"BaseWeapons",
+				"Clips",
+				"WeaponAttributes"
+			],
+			"title": "GameItems"
+		},
+		"BaseWeapon": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"Name": {
+					"type": "string"
+				},
+				"PrimaryClip": {
+					"type": "string"
+				},
+				"SecondaryClip": {
+					"type": "null"
+				},
+				"Attributes": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"Attributes",
+				"Name",
+				"PrimaryClip",
+				"SecondaryClip"
+			],
+			"title": "BaseWeapon"
+		},
+		"Clip": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"Name": {
+					"type": "string",
+					"required": [
+						"Name"
+					]
+				},
+				"Inherits": {
+					"anyOf": [
+						{
+							"type": "null"
+						},
+						{
+							"type": "string"
+						}
+					]
+				},
+				"Recoil": {
+					"type": "number"
+				},
+				"RPM": {
+					"type": "integer"
+				},
+				"Ammo": {
+					"type": "integer"
+				},
+				"ClipSize": {
+					"type": "integer"
+				},
+				"AmmoType": {
+					"type": "string"
+				},
+				"ReloadTime": {
+					"type": "number"
+				},
+				"BulletSize": {
+					"type": "number"
+				},
+				"Damage": {
+					"type": "integer"
+				},
+				"Force": {
+					"type": "number"
+				},
+				"Spread": {
+					"type": "number"
+				},
+				"FiringType": {
+					"type": "string"
+				},
+				"ScreenShake": {
+					"$ref": "#/definitions/ScreenShake"
+				},
+				"DryFireSound": {
+					"type": "string"
+				},
+				"ShootSound": {
+					"type": "string"
+				},
+				"BulletEjectParticle": {
+					"type": "string"
+				},
+				"MuzzleFlashParticle": {
+					"type": "string"
+				},
+				"InfiniteAmmo": {
+					"type": "string"
+				},
+				"ReloadEmptyTime": {
+					"type": "integer"
+				},
+				"Bullets": {
+					"type": "integer"
+				},
+				"ShootAnim": {
+					"type": "string"
+				},
+				"ReloadAnim": {
+					"type": "string"
+				},
+				"ReloadEmptyAnim": {
+					"type": "string"
+				},
+				"DrawAnim": {
+					"type": "string"
+				},
+				"DrawEmptyAnim": {
+					"type": "string"
+				},
+				"BarrelSmokeParticle": {
+					"type": "string"
+				},
+				"BulletTracerParticle": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"Ammo",
+				"ClipSize",
+				"Inherits",
+				"Name",
+				"RPM",
+				"Recoil"
+			],
+			"title": "Clip"
+		},
+		"ScreenShake": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"Length": {
+					"type": "number"
+				},
+				"Speed": {
+					"type": "integer"
+				},
+				"Size": {
+					"type": "number"
+				},
+				"Rotation": {
+					"type": "number"
+				}
+			},
+			"required": [
+				"Length",
+				"Rotation",
+				"Size",
+				"Speed"
+			],
+			"title": "ScreenShake"
+		},
+		"WeaponAttribute": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"Name": {
+					"type": "string"
+				},
+				"Inherits": {
+					"anyOf": [
+						{
+							"type": "null"
+						},
+						{
+							"type": "string"
+						}
+					]
+				},
+				"Bucket": {
+					"type": "integer"
+				},
+				"HoldType": {
+					"type": "string"
+				},
+				"ViewModel": {
+					"type": "string"
+				},
+				"WorldModelPath": {
+					"type": "string"
+				},
+				"Icon": {
+					"type": "string"
+				},
+				"FOV": {
+					"type": "integer"
+				},
+				"ZoomFOV": {
+					"type": "integer"
+				},
+				"WalkAnimationSpeedMod": {
+					"type": "number"
+				},
+				"ZoomAnimData": {
+					"$ref": "#/definitions/AnimData"
+				},
+				"RunAnimData": {
+					"$ref": "#/definitions/AnimData"
+				},
+				"BucketWeight": {
+					"type": "integer"
+				},
+				"CanDrop": {
+					"type": "boolean"
+				},
+				"DropWeaponOnDeath": {
+					"type": "boolean"
+				},
+				"BulletCocking": {
+					"type": "boolean"
+				},
+				"BarrelSmoking": {
+					"type": "boolean"
+				},
+				"FreezeViewModelOnZoom": {
+					"type": "null"
+				},
+				"TuckRange": {
+					"type": "integer"
+				},
+				"AimSensitivity": {
+					"type": "number"
+				},
+				"DualWield": {
+					"type": "boolean"
+				},
+				"PrimaryDelay": {
+					"type": "integer"
+				},
+				"SecondaryDelay": {
+					"type": "integer"
+				}
+			},
+			"required": [
+				"Bucket",
+				"FOV",
+				"HoldType",
+				"Icon",
+				"Inherits",
+				"Name",
+				"RunAnimData",
+				"ViewModel",
+				"WalkAnimationSpeedMod",
+				"WorldModelPath",
+				"ZoomAnimData",
+				"ZoomFOV"
+			],
+			"title": "WeaponAttribute"
+		},
+		"AnimData": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"Angle": {
+					"type": "string"
+				},
+				"Pos": {
+					"type": "string"
+				}
+			},
+			"required": [],
+			"title": "AnimData"
+		}
+	}
+}

@@ -5,9 +5,64 @@
 			"PrimaryClip": "AK47_Primary_Clip",
 			"SecondaryClip": null,
 			"Attributes": "AK47_Attributes"
+		},
+		{
+			"Name": "AK47Dual",
+			"PrimaryClip": "AK47_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "AK47Dual_Attributes"
+		},
+		{
+			"Name": "AK74",
+			"PrimaryClip": "AK74_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "AK47_Attributes"
+		},
+		{
+			"Name": "MAC10",
+			"PrimaryClip": "Mac10_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "Mac10_Attributes"
+		},
+		{
+			"Name": "Deagle",
+			"PrimaryClip": "Deagle_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "Deagle_Attributes"
+		},
+		{
+			"Name": "DeagleDual",
+			"PrimaryClip": "Deagle_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "DeagleDual_Attributes"
+		},
+		{
+			"Name": "M4A1",
+			"PrimaryClip": "M4A1_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "M4A1_Attributes"
+		},
+		{
+			"Name": "M249",
+			"PrimaryClip": "M249_Primary_Clip",
+			"SecondaryClip": null,
+			"Attributes": "M249_Attributes"
 		}
+		
 	],
 	"Clips": [
+		{
+			"Name": "AK74_Primary_Clip",
+			"Inherits": "AK47_Primary_Clip",
+			"Recoil": 0,
+			"RPM": 10000,
+			"Ammo": 1000,
+			"ClipSize": 1000
+		},
+		{
+			"Name": "Base_Infinite_Ammo",
+			"InfiniteAmmo": "Clip"
+		},
 		{
 			"Name": "AK47_Primary_Clip",
 			"Inherits": "WeaponBase_Primary_Clip",
@@ -32,6 +87,86 @@
 			"ShootSound": "css_ak47.fire",
 			"BulletEjectParticle": "particles/pistol_ejectbrass.vpcf",
 			"MuzzleFlashParticle": "particles/swb/muzzle/flash_medium.vpcf",
+			"InfiniteAmmo": "Reserve"
+		},
+		{
+			"Name": "Mac10_Primary_Clip",
+			"Inherits": "WeaponBase_Primary_Clip",
+			"Ammo": 32,
+			"AmmoType": "SMG",
+			"ClipSize": 32,
+			"ReloadTime": 3.14,
+			"BulletSize": 2,
+			"Damage": 12,
+			"Force": 3,
+			"Spread": 0.2,
+			"Recoil": 0.9,
+			"RPM": 1090,
+			"FiringType": "Automatic",
+			"ScreenShake": {
+				"Length": 0.5,
+				"Speed": 4.0,
+				"Size": 0.3,
+				"Rotation": 0.4
+			},
+			"DryFireSound": "swb_smg.empty",
+			"ShootSound": "css_mac10.fire",
+			"BulletEjectParticle": "particles/pistol_ejectbrass.vpcf",
+			"MuzzleFlashParticle": "particles/swb/muzzle/flash_small.vpcf",
+			"InfiniteAmmo": "Reserve"
+		},
+		{
+			"Name": "M4A1_Primary_Clip",
+			"Inherits": "WeaponBase_Primary_Clip",
+			"Ammo": 30,
+			"AmmoType": "Rifle",
+			"ClipSize": 30,
+			"ReloadTime": 3.05,
+			"BulletSize": 3.5,
+			"Damage": 13,
+			"Force": 2.5,
+			"Spread": 0.08,
+			"Recoil": 0.45,
+			"RPM": 700,
+			"FiringType": "Automatic",
+			"ScreenShake":
+			{
+				"Length": 0.5,
+				"Speed": 4.0,
+				"Size": 0.5,
+				"Rotation": 0.5
+			},
+			"DryFireSound": "swb_rifle.empty",
+			"ShootSound": "css_m4a1.fire",
+			"BulletEjectParticle": "particles/pistol_ejectbrass.vpcf",
+			"MuzzleFlashParticle": "particles/swb/muzzle/flash_medium.vpcf",
+			"InfiniteAmmo": "Reserve"
+		},
+		{
+			"Name": "M249_Primary_Clip",
+			"Inherits": "WeaponBase_Primary_Clip",
+			"Ammo": 100,
+			"AmmoType": "LMG",
+			"ClipSize": 100,
+			"ReloadTime": 5.7,
+			"BulletSize": 5,
+			"Damage": 15,
+			"Force": 4,
+			"Spread": 0.2,
+			"Recoil": 0.7,
+			"RPM": 800,
+			"FiringType": "Automatic",
+			"ScreenShake": {
+				"Length": 0.5,
+				"Speed": 4.0,
+				"Size": 1.0,
+				"Rotation": 0.5
+			},
+			"DryFireSound": "swb_lmg.empty",
+			"ShootSound": "css_m249.fire",
+			"BulletEjectParticle": "particles/pistol_ejectbrass.vpcf",
+			"MuzzleFlashParticle": "particles/swb/muzzle/flash_large.vpcf",
+			"BulletTracerParticle": "particles/swb/tracers/tracer_large.vpcf",
 			"InfiniteAmmo": "Reserve"
 		},
 		{
@@ -62,6 +197,55 @@
 	],
 	"WeaponAttributes": [
 		{
+			"Name": "AK47Dual_Attributes",
+			"Inherits": "AK47_Attributes",
+			"DualWield": true
+		},
+		{
+			"Name": "DeagleDual_Attributes",
+			"Inherits": "Deagle_Attributes",
+			"DualWield": true
+		},
+		{
+			"Name": "Deagle_Attributes",
+			"Inherits": "WeaponBase_Attributes",
+			"AmmoType": "Pistol",
+			"Bucket": 1,
+			"ViewModel": "weapons/swb/css/deagle/css_v_pist_deagle.vmdl",
+			"WorldModelPath": "weapons/swb/css/deagle/css_w_pist_deagle.vmdl",
+			"Icon": "/swb_css/textures/ui/css_icon_deagle.png",
+			"FOV": 75,
+			"ZoomFOV": 60,
+			"ZoomAnimData": {
+				"Angle": "0, -0.1, 0", 
+				"Pos": "-5.125, 0, 2.67"
+			},
+			"RunAnimData": {
+				"Angle": "-40, 0, 0", 
+				"Pos": "0, -3, -8"
+			}
+		},
+		{
+			"Name": "AK74_Attributes",
+			"Inherits": "WeaponBase_Attributes",
+			"Bucket": 3,
+			"HoldType": "Rifle",
+			"ViewModel": "weapons/swb/css/ak47/css_v_rif_ak47.vmdl",
+			"WorldModelPath": "weapons/rust_pistol/rust_pistol.vmdl",
+			"Icon": "/swb_css/icon_ak47.png",
+			"FOV": 75,
+			"ZoomFOV": 35,
+			"WalkAnimationSpeedMod": 0.85,
+			"ZoomAnimData": {
+				"Angle": "-2.3, -0.05, 0",
+				"Pos": "-6.085, 0, 2.2"
+			},
+			"RunAnimData": {
+				"Angle": "10, 40, 0",
+				"Pos": "5, 0, 0"
+			}
+		},
+		{
 			"Name": "AK47_Attributes",
 			"Inherits": "WeaponBase_Attributes",
 			"Bucket": 3,
@@ -79,6 +263,66 @@
 			"RunAnimData": {
 				"Angle": "10, 40, 0",
 				"Pos": "5, 0, 0"
+			}
+		},
+		{
+			"Name": "Mac10_Attributes",
+			"Inherits": "WeaponBase_Attributes",
+			"Bucket": 2,
+			"HoldType": "Pistol",
+			"ViewModel": "weapons/swb/css/mac10/css_v_smg_mac10.vmdl",
+			"WorldModelPath": "weapons/swb/css/mac10/css_w_smg_mac10.vmdl",
+			"Icon": "/swb_css/textures/ui/css_icon_mac10.png",
+			"FOV": 75,
+			"ZoomFOV": 75,
+			"WalkAnimationSpeedMod": 0.85,
+			"ZoomAnimData": {
+				"Angle": "-0.7f, -5.4f, -7f",
+				"Pos": "-6.94f, 0f, 2.9f"
+			},
+			"RunAnimData": {
+				"Angle": "10, 40, 0",
+				"Pos": "5, 0, 0"
+			}
+		},
+		{
+			"Name": "M4A1_Attributes",
+			"Inherits": "WeaponBase_Attributes",
+			"Bucket": 3,
+			"HoldType": "Rifle",
+			"ViewModel": "weapons/swb/css/m4a1/css_v_rif_m4a1.vmdl",
+			"WorldModelPath": "weapons/swb/css/m4a1/css_w_rif_m4a1.vmdl",
+			"Icon": "/swb_css/textures/ui/css_icon_m4a1.png",
+			"FOV": 60,
+			"ZoomFOV": 35,
+			"WalkAnimationSpeedMod": 0.85,
+			"ZoomAnimData": {
+				"Angle": "-2.8, -1.5, -4",
+				"Pos": "-6.34, 6, 0.57"
+			},
+			"RunAnimData": {
+				"Angle": "10, 40, 0",
+				"Pos": "5, 0, 0"
+			}
+		},
+		{
+			"Name": "M249_Attributes",
+			"Inherits": "WeaponBase_Attributes",
+			"Bucket": 4,
+			"HoldType": "Rifle",
+			"ViewModel": "weapons/swb/css/m249/css_v_mach_m249para.vmdl",
+			"WorldModelPath": "weapons/swb/css/m249/css_w_mach_m249para.vmdl",
+			"Icon": "/swb_css/textures/ui/css_icon_m249.png",
+			"FOV": 75,
+			"ZoomFOV": 40,
+			"WalkAnimationSpeedMod": 0.7,
+			"ZoomAnimData": {
+				"Angle": "1, 0, 0 ",
+				"Pos": "-4.425, 2, 2.45"
+			},
+			"RunAnimData": {
+				"Angle": "10, 30, 0",
+				"Pos": "4, 0, 0"
 			}
 		},
 		{

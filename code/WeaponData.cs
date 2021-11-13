@@ -8,12 +8,18 @@ using SWB_Base;
 
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace KFGO
 {
+	interface IGameItem<T>
+	{
+		string GetName();
+		string GetInherit();
+		void CopyTo( ref T item );
+	}
 
 	public struct GameItems
 	{
@@ -30,7 +36,7 @@ namespace KFGO
 		public string Attributes;
 	}
 
-	public struct Clip
+	public struct Clip : IGameItem<Clip>
 	{
 		public string Name;
 		public string Inherits;
@@ -60,6 +66,9 @@ namespace KFGO
 		public string BarrelSmokeParticle;
 		public string BulletTracerParticle;
 		public InfiniteAmmoType? InfiniteAmmo;
+
+		public string GetInherit() => this.Inherits;
+		public string GetName() => this.Name;
 
 		public void CopyTo( ref Clip to )
 		{
@@ -91,11 +100,10 @@ namespace KFGO
 			if ( this.BarrelSmokeParticle != null ) to.BarrelSmokeParticle = this.BarrelSmokeParticle;
 			if ( this.BulletTracerParticle != null ) to.BulletTracerParticle = this.BulletTracerParticle;
 			if ( this.InfiniteAmmo != null ) to.InfiniteAmmo = this.InfiniteAmmo.Value;
-
 		}
 	}
 
-	public struct WeaponAttribute
+	public struct WeaponAttribute : IGameItem<WeaponAttribute>
 	{
 		public string Name;
 		public string Inherits;
@@ -120,6 +128,9 @@ namespace KFGO
 		public float? SecondaryDelay;
 		public AngPos ZoomAnimData;
 		public AngPos RunAnimData;
+
+		public string GetInherit() => this.Inherits;
+		public string GetName() => this.Name;
 
 		public void CopyTo( ref WeaponAttribute to )
 		{
@@ -183,7 +194,7 @@ namespace KFGO
 		private static Dictionary<string, Clip> Clips { get; set; }
 		private static Dictionary<string, WeaponAttribute> WeaponAttributes { get; set; }
 		private static Dictionary<string, BaseWeapon> BaseWeapons { get; set; }
-
+		private static FileWatch _Watch;
 
 		public string Name;
 		public Clip Primary;
@@ -192,6 +203,7 @@ namespace KFGO
 
 		static WeaponData() => Init();
 
+
 		public static void Init()
 		{
 			if ( Clips is null )
@@ -199,12 +211,22 @@ namespace KFGO
 				WeaponAttributes = new( 32 );
 				BaseWeapons = new( 32 );
 				Clips = new( 32 );
+				_Watch = FileSystem.Mounted.Watch( PATH );
+				_Watch.Enabled = true;
+				_Watch.OnChangedFile += Glob_OnChangedFile;
 				return;
 			}
 
 			Clips.Clear();
 			BaseWeapons.Clear();
 			WeaponAttributes.Clear();
+		}
+
+		private static void Glob_OnChangedFile( string obj )
+		{
+			KLog.Info( $"File '{obj}' changed, reparsing weapons" );
+			Init();
+			ParseFile();
 		}
 
 		private static GameItems ParseFile()
@@ -242,7 +264,7 @@ namespace KFGO
 			}
 
 			var json = ParseFile();
-
+			Entries = json;
 
 			foreach ( var item in json.Clips )
 			{
@@ -258,7 +280,45 @@ namespace KFGO
 			{
 				BaseWeapons[item.Name] = item;
 			}
+
+			for ( int i = 0; i < json.WeaponAttributes.Length; i++ )
+			{
+				ref var item = ref json.WeaponAttributes[i];
+				CopyInheritance( WeaponAttributes, ref item, out var result );
+				KLog.JSON(result);
+
+				// item = result;
+			}
+
+			for ( int i = 0; i < json.Clips.Length; i++ )
+			{
+				ref var item = ref json.Clips[i];
+				CopyInheritance( Clips, ref item, out var result );
+				KLog.JSON(result);
+				// item = result;
+			}
+
+
 		}
+
+		private static void CopyInheritance<T>( IDictionary<string, T> dict, ref T derrived, out T result ) where T : IGameItem<T>, new()
+		{
+			result = new();
+			Stack<T> attributes = new();
+			attributes.Push( derrived );
+
+			while ( dict.TryGetValue( derrived.GetInherit() ?? "", out var next ) )
+			{
+				attributes.Push( next );
+				derrived = next;
+			}
+
+			while ( attributes.TryPop( out var attr ) )
+			{
+				attr.CopyTo( ref result );
+			}
+		}
+
 
 		public static WeaponData GetByName( string weaponname )
 		{
@@ -297,56 +357,36 @@ namespace KFGO
 				return new WeaponAttribute();
 			}
 
-			Stack<WeaponAttribute> attributes = new();
-			attributes.Push( primary );
-
-			while(WeaponAttributes.TryGetValue(primary.Inherits??"", out var next))
-			{
-				attributes.Push( next );
-				primary = next;
-			}
-
-			WeaponAttribute result = new WeaponAttribute();
-			while (attributes.TryPop(out var attr))
-			{
-				attr.CopyTo(ref result);
-			}
+			CopyInheritance( WeaponAttributes, ref primary, out var result );
 
 			return result;
 		}
 
+
 		private static Clip GetClip( string weaponname, string clipname )
 		{
-			if ( string.IsNullOrEmpty( clipname ) )
-			{
-				return new Clip();
-			}
-
-			if ( !Clips.TryGetValue( clipname ?? "", out var primary ) )
+			if ( string.IsNullOrEmpty( clipname ) || !Clips.TryGetValue( clipname ?? "", out var primary ) )
 			{
 				Log.Trace( $"Could not find clip '{clipname}' for weapon '{weaponname}'" );
 				Log.Warning( $"Could not find clip '{clipname}' for weapon '{weaponname}'" );
 				return new Clip();
 			}
 
-			Stack<Clip> clips = new();
-			clips.Push( primary );
-
-			while ( Clips.TryGetValue( primary.Inherits ?? "", out var baseclip ) )
-			{
-				clips.Push( baseclip );
-				primary = baseclip;
-			}
-
-			Clip result = new();
-			while ( clips.TryPop(out var clip))
-			{
-				clip.CopyTo( ref result );
-			}
+			CopyInheritance( Clips, ref primary, out var result );
 
 			return result;
 		}
 
+#if DEBUG
+		[ServerCmd]
+#else
+		[AdminCmd]
+#endif
+		public static void KFGO_SV_ReloadWeaponConfig()
+		{
+			Init();
+			Parse();
+		}
 
 		[ServerCmd]
 		public static void KFGO_SV_PrintWeaponData()

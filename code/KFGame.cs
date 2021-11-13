@@ -1,8 +1,9 @@
 ﻿
 using Sandbox;
 
+using SWB_CSS;
+
 using System;
-using System.Diagnostics;
 
 namespace KFGO
 {
@@ -67,6 +68,15 @@ namespace KFGO
 		protected virtual void InitializeGame()
 		{
 			WeaponData.Parse();
+			for ( int i = 0; i < 10; i++ ) KLog.Info();
+
+			KLog.JSON( new MAC10() );
+			KLog.JSON( new SWB_CSS.M4A1() );
+			KLog.JSON( new SWB_CSS.DeagleDual() );
+			KLog.JSON( new SWB_CSS.M249() );
+			KLog.JSON( new SWB_CSS.Deagle() );
+
+
 
 			if ( this.IsServer )
 			{
